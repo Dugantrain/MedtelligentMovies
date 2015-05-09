@@ -4,12 +4,18 @@ using Models;
 
 namespace MedtelligentMovies.Common.DAL.DbContexts
 {
+    public interface IMedtelligentMovieDbContext
+    {
+        DbSet<Movie> Movies { get; set; }
+        DbSet<Genre> Genres { get; set; }
+        DbSet<User> Users { get; set; }
+    }
     /// <summary>
     /// Summary description for MedtelligentMovieContext
     /// </summary>
-    public class MedtelligentMovieContext : DbContext
+    public class MedtelligentMovieDbContext : DbContext, IMedtelligentMovieDbContext
     {
-        public MedtelligentMovieContext()
+        public MedtelligentMovieDbContext()
             : base("MainConnectionString")
         {
         }

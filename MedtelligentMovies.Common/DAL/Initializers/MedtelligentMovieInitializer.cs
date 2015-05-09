@@ -5,9 +5,9 @@ using Models;
 
 namespace MedtelligentMovies.Common.DAL.Initializers
 {
-    public class MedtelligentMovieInitializer : System.Data.Entity.CreateDatabaseIfNotExists<MedtelligentMovieContext>
+    public class MedtelligentMovieInitializer : System.Data.Entity.CreateDatabaseIfNotExists<MedtelligentMovieDbContext>
     {
-        protected override void Seed(MedtelligentMovieContext medtelligentMovieContext)
+        protected override void Seed(MedtelligentMovieDbContext medtelligentMovieContext)
         {
             //Users
             var users = new List<User>
