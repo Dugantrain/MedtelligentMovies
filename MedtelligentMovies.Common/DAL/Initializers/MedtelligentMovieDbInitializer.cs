@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MedtelligentMovies.Common.DAL.DbContexts;
 using MedtelligentMovies.Common.Models;
@@ -28,7 +29,7 @@ namespace MedtelligentMovies.Common.DAL.Initializers
             //Genres
             var genres = new List<Genre>
             {
-                new Genre{Title = "Comedy",Description = "Funny Stuff.  Tee hee."}
+                new Genre{Title = "Comedy",Description = "Tee hee."}
             };
             genres.ForEach(g=>medtelligentMovieContext.Genres.Add(g));
 
@@ -37,11 +38,13 @@ namespace MedtelligentMovies.Common.DAL.Initializers
             //Movies
             var movies = new List<Movie>
             {
-                new Movie{Title = "Stardust Memories",Genre = genres.FirstOrDefault(g=>g.Title == "Comedy"),Description="Woody Allen plays Sandy Bates, a film-maker attending a retrospective of his works."},
-                new Movie{Title = "Ghostbusters",Genre = genres.FirstOrDefault(g=>g.Title == "Comedy"),Description="Madcap undead antics in New York.  Some sticky shit, man."}
+                new Movie{Title = "Stardust Memories",Genre = genres.FirstOrDefault(g=>g.Title == "Comedy"),Description="Woody Allen plays Sandy Bates, a film-maker attending a retrospective of his works.",ReleaseDate = new DateTime(1980,9,26)},
+                new Movie{Title = "Ghostbusters",Genre = genres.FirstOrDefault(g=>g.Title == "Comedy"),Description="Madcap undead antics in New York.",ReleaseDate = new DateTime(1984,6,1)}
             };
             movies.ForEach(m=>medtelligentMovieContext.Movies.Add(m));
             medtelligentMovieContext.SaveChanges();
+
+            medtelligentMovieContext.Dispose();
         }
     }
 }
