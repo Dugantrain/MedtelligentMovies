@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace MedtelligentMovies.Common.Models
 {
@@ -10,6 +11,9 @@ namespace MedtelligentMovies.Common.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
+        public IEnumerable<Movie> Movies { get; set; } 
+
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public int CreatedByUserId { get; set; }

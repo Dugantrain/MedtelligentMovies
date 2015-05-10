@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using MedtelligentMovies.Common.DAL.DbContexts;
 using MedtelligentMovies.Common.Models;
@@ -8,7 +9,6 @@ namespace MedtelligentMovies.Common.Repositories
     public interface IMovieRepository : IRepository
     {
         Movie GetMoveById(int id);
-        IEnumerable<Movie> GetMoviesByGenreId(int genreId);
     }
     public class MovieRepository : IMovieRepository
     {
@@ -20,12 +20,6 @@ namespace MedtelligentMovies.Common.Repositories
         public Movie GetMoveById(int id)
         {
             return _medtelligentMovieContext.Movies.Find(id);
-        }
-
-        //TODO:  Paging
-        public IEnumerable<Movie> GetMoviesByGenreId(int genreId)
-        {
-            return _medtelligentMovieContext.Movies.Where(m => m.Genre.Id == genreId);
         }
     }
 }

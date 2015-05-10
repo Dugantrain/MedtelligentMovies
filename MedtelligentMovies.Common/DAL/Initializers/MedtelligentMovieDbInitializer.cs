@@ -43,8 +43,6 @@ namespace MedtelligentMovies.Common.DAL.Initializers
             };
             movies.ForEach(m=>medtelligentMovieContext.Movies.Add(m));
             medtelligentMovieContext.SaveChanges();
-
-            medtelligentMovieContext.Dispose();
         }
     }
 }
