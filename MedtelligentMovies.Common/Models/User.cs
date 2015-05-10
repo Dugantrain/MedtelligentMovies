@@ -6,6 +6,7 @@ using System.Web;
 
 namespace Models
 {
+    //TODO:  Immutability!  All up on your tonsils!
     /// <summary>
     /// Summary description for User
     /// </summary>

@@ -5,7 +5,8 @@ using Models;
 
 namespace MedtelligentMovies.Common.DAL.Initializers
 {
-    public class MedtelligentMovieInitializer : System.Data.Entity.CreateDatabaseIfNotExists<MedtelligentMovieDbContext>
+    public class MedtelligentMovieDbInitializer : 
+        System.Data.Entity.CreateDatabaseIfNotExists<MedtelligentMovieDbContext>
     {
         protected override void Seed(MedtelligentMovieDbContext medtelligentMovieContext)
         {

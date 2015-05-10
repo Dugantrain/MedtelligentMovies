@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\DbContexts\MedtelligentMovieDbContext.cs" />
-    <Compile Include="DAL\Initializers\MedtelligentMovieInitializer.cs" />
+    <Compile Include="DAL\Initializers\MedtelligentMovieDbInitializer.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Models\IAuditable.cs" />
     <Compile Include="Models\IModel.cs" />

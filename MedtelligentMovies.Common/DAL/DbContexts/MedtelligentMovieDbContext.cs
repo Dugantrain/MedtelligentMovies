@@ -16,8 +16,9 @@ namespace MedtelligentMovies.Common.DAL.DbContexts
     public class MedtelligentMovieDbContext : DbContext, IMedtelligentMovieDbContext
     {
         public MedtelligentMovieDbContext()
-            : base("MainConnectionString")
+            : base("DefaultConnection")
         {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<MedtelligentMovieDbContext>());
         }
 
         public DbSet<Movie> Movies { get; set; }

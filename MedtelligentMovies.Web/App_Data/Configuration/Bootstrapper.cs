@@ -13,7 +13,7 @@ namespace MedtelligentMovies.Web.App_Data.Configuration
                    WithMappings.FromMatchingInterface,
                    WithName.Default,
                    WithLifetime.ContainerControlled);
-            var x = container.Resolve<IMovieRepository>();
+            var movie = container.Resolve<IMovieRepository>().GetMoveById(1);
             return container;
         }
     }
