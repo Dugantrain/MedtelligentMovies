@@ -1,7 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Models
+namespace MedtelligentMovies.Common.Models
 {
     /// <summary>
     /// Summary description for IAuditable

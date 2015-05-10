@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-
-namespace Models
+namespace MedtelligentMovies.Common.Models
 {
     //TODO:  Immutability!  All up on your tonsils!
     /// <summary>

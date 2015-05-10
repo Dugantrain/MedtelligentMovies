@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace Models
+namespace MedtelligentMovies.Common.Models
 {
     /// <summary>
     /// Summary description for IAuditable
     /// </summary>
     public interface IAuditable : IModel
     {
-        DateTime CreatedDate { get; }
-        DateTime LastUpdatedDate { get; }
-        int CreatedByUserId { get; }
-        int LastUpdatedByUserId { get; }
+        DateTime CreatedDate { get; set; }
+        DateTime LastUpdatedDate { get; set; }
+        int CreatedByUserId { get; set; }
+        int LastUpdatedByUserId { get; set; }
     }
 }

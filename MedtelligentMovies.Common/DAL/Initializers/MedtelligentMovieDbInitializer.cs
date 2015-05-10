@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MedtelligentMovies.Common.DAL.DbContexts;
-using Models;
+using MedtelligentMovies.Common.Models;
 
 namespace MedtelligentMovies.Common.DAL.Initializers
 {

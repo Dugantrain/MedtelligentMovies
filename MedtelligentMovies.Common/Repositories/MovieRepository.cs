@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 using MedtelligentMovies.Common.DAL.DbContexts;
-using Models;
+using MedtelligentMovies.Common.Models;
 
 namespace MedtelligentMovies.Common.Repositories
 {

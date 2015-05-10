@@ -1,6 +1,9 @@
-﻿using System.Data.Entity;
+﻿using System.CodeDom;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Models;
+using System.Linq;
+using MedtelligentMovies.Common.Models;
 
 namespace MedtelligentMovies.Common.DAL.DbContexts
 {
@@ -28,6 +31,23 @@ namespace MedtelligentMovies.Common.DAL.DbContexts
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
+
+        //Intercepts all saved assets, checks for IAuditable, and populates the IAuditable properties.
+        public new int SaveChanges()
+        {
+            var createdAssets = ChangeTracker.Entries<IAuditable>().Where(e => e.State == EntityState.Added);
+            foreach (var entity in createdAssets.Select(createdAsset => createdAsset.Entity))
+            {
+                entity.CreatedDate = System.DateTime.UtcNow;
+                entity.LastUpdatedDate = System.DateTime.UtcNow;
+            }
+            var modifiedAssets = ChangeTracker.Entries<IAuditable>().Where(e => e.State == EntityState.Modified);
+            foreach (var entity in modifiedAssets.Select(modifiedAsset => modifiedAsset.Entity))
+            {
+                entity.LastUpdatedDate = System.DateTime.UtcNow;
+            }
+            return base.SaveChanges();
         }
     }
 }
