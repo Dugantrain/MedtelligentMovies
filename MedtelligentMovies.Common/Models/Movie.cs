@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedtelligentMovies.Common.Models
 {
@@ -8,10 +9,13 @@ namespace MedtelligentMovies.Common.Models
     public class Movie : IAuditable
     {
         public int Id { get; set; }
+        [Index("IX_Movie_TitleDescription", 1)]
         public string Title { get; set; }
+        [Index("IX_Movie_TitleDescription", 2)]
         public string Description { get; set; }
         public DateTime ReleaseDate { get; set; }
         public Genre Genre { get; set; }
+        [Index]
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public int CreatedByUserId { get; set; }

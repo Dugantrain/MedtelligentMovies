@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedtelligentMovies.Common.Models
 {
@@ -12,6 +13,7 @@ namespace MedtelligentMovies.Common.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        [Index(IsClustered = true,IsUnique = true)]
         public string UserName { get; set; }
         public string EncryptedPassword { get; set; }
         public bool IsAdministrator { get; set; }
