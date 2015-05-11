@@ -9,7 +9,7 @@ namespace MedtelligentMovies.Common.Repositories
     public interface IMovieRepository : IRepository
     {
         Movie GetMovieById(int id);
-        List<IEnumerable<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults);
+        Dictionary<int, IEnumerable<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults);
         Movie AddMovie(Movie movie);
         Movie UpdateMovie(Movie movie);
         void DeleteMovie(int movieId);
@@ -26,15 +26,14 @@ namespace MedtelligentMovies.Common.Repositories
             return _medtelligentMovieContext.Movies.Find(id);
         }
 
-        public List<IEnumerable<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults)
+        public Dictionary<int,IEnumerable<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults)
         {
-            //TODO:  Return as IDictionary<int,IEnumerable<Movie>>
             var ordering = genreIds.Select((id, index) => new {id, index});
             return _medtelligentMovieContext.Movies
                 .Where(m => genreIds.Contains(m.Genre.Id))
                 .GroupBy(m => m.Genre.Id)
-                .Select(group => group.OrderByDescending(mv => mv.ReleaseDate)
-                    .Take(topResults)).ToList();
+                .Select(group => new{genreId = group.Key,movies = group.OrderByDescending(mv => mv.ReleaseDate)
+                    .Take(topResults)}).ToDictionary(k=>k.genreId,v=>v.movies);
         }
 
         public Movie AddMovie(Movie movie)
