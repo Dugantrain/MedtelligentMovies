@@ -9,24 +9,24 @@ using MedtelligentMovies.Common.Models;
 
 namespace MedtelligentMovies.Common.Repositories
 {
-    public interface IGenreRepository
+    public interface IGenreRepository : IRepository
     {
-        IEnumerable<Genre> GetGenresWithTopMovies(int startIndex, int numResults, int numTopMovies);
+        IEnumerable<Genre> GetGenres(int startIndex, int numResults);
     }
-    public class GenreRepository : IRepository
+    public class GenreRepository : IGenreRepository
     {
         private readonly IMedtelligentMovieDbContext _medtelligentMovieContext;
         public GenreRepository(IMedtelligentMovieDbContext medtelligentMovieContext)
         {
             _medtelligentMovieContext = medtelligentMovieContext;
         }
-        public IEnumerable<Genre> GetGenresWithTopMovies(int startIndex, int numResults, int numTopMovies)
+        public IEnumerable<Genre> GetGenres(int startIndex, int numResults)
         {
             return _medtelligentMovieContext.Genres.OrderBy(g => g.Title)
                 //Page the Genres
-                .Skip(startIndex).Take(numResults)
-                //Pull back the n most recently created.
-                .Include(g => g.Movies.Select(m => m).OrderByDescending(m => m.CreatedDate).Take(numTopMovies));
+                .Skip(startIndex).Take(numResults);
+            //Pull back the n most recently created.
+            //.Include(g => g.Movies.OrderByDescending(m => m.CreatedDate).Take(numTopMovies).Select(m => m));
         }
     }
 }

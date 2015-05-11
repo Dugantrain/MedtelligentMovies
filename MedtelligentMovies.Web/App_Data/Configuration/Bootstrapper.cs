@@ -1,4 +1,5 @@
-﻿using MedtelligentMovies.Common.Repositories;
+﻿using System.Linq;
+using MedtelligentMovies.Common.Repositories;
 using Microsoft.Practices.Unity;
 
 namespace MedtelligentMovies.Web.App_Data.Configuration
@@ -13,7 +14,10 @@ namespace MedtelligentMovies.Web.App_Data.Configuration
                    WithMappings.FromMatchingInterface,
                    WithName.Default,
                    WithLifetime.ContainerControlled);
-            var genres = container.Resolve<IGenreRepository>().GetGenresWithTopMovies(0,5,5);
+            var genres = container.Resolve<IGenreRepository>().GetGenres(0,5);
+            var genreIds = genres.Select(g => g.Id).ToArray();
+            var movieRepository = container.Resolve<IMovieRepository>();
+            var movies = movieRepository.GetTopMoviesByGenreIds(genreIds, 5);
             return container;
         }
     }
