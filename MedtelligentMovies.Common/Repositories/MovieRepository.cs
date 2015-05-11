@@ -28,6 +28,7 @@ namespace MedtelligentMovies.Common.Repositories
 
         public List<IEnumerable<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults)
         {
+            //TODO:  Return as IDictionary<int,IEnumerable<Movie>>
             var ordering = genreIds.Select((id, index) => new {id, index});
             return _medtelligentMovieContext.Movies
                 .Where(m => genreIds.Contains(m.Genre.Id))
@@ -46,11 +47,9 @@ namespace MedtelligentMovies.Common.Repositories
         public Movie UpdateMovie(Movie movie)
         {
             var originalMovie = _medtelligentMovieContext.Movies.Find(movie.Id);
-            if (originalMovie != null)
-            {
-                originalMovie = movie;
-                _medtelligentMovieContext.SaveChanges();
-            }
+            if (originalMovie == null) return movie;
+            originalMovie = movie;
+            _medtelligentMovieContext.SaveChanges();
             return movie;
         }
 

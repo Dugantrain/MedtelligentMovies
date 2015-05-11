@@ -2,7 +2,7 @@
 using MedtelligentMovies.Common.Repositories;
 using Microsoft.Practices.Unity;
 
-namespace MedtelligentMovies.Web.App_Data.Configuration
+namespace MedtelligentMovies.Web.Configuration
 {
     public class Bootstrapper
     {
@@ -17,7 +17,7 @@ namespace MedtelligentMovies.Web.App_Data.Configuration
             var genres = container.Resolve<IGenreRepository>().GetGenres(0,5);
             var genreIds = genres.Select(g => g.Id).ToArray();
             var movieRepository = container.Resolve<IMovieRepository>();
-            var movies = movieRepository.GetTopMoviesByGenreIds(genreIds, 5);
+            var moviesByGenre = movieRepository.GetTopMoviesByGenreIds(genreIds, 5);
             return container;
         }
     }

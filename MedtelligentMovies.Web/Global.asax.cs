@@ -6,7 +6,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using MedtelligentMovies.Web;
-using MedtelligentMovies.Web.App_Data.Configuration;
+using MedtelligentMovies.Web.Configuration;
 
 namespace MedtelligentMovies.Web
 {
