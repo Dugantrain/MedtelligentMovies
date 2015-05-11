@@ -12,6 +12,7 @@ namespace MedtelligentMovies.Common.DAL.DbContexts
         DbSet<Movie> Movies { get; set; }
         DbSet<Genre> Genres { get; set; }
         DbSet<User> Users { get; set; }
+        int SaveChanges();
     }
     /// <summary>
     /// Summary description for MedtelligentMovieContext
