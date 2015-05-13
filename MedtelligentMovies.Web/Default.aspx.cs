@@ -8,15 +8,20 @@ using MedtelligentMovies.Common.Models;
 using MedtelligentMovies.Common.Repositories;
 using MedtelligentMovies.Common.Services;
 using Microsoft.Practices.ServiceLocation;
+using Microsoft.Practices.Unity;
 
 namespace MedtelligentMovies.Web
 {
     public partial class Default : Page
     {
-        //WebForms don't play well with constructor injection so we'll just use ServiceLocator.
-        //Nothing here is mockable anyway, so we're not missing out on a whole lot.
-        private static readonly IMovieService MovieService = ServiceLocator.Current.GetInstance<IMovieService>();
-        private static readonly IGenreService GenreService = ServiceLocator.Current.GetInstance<IGenreService>();
+        //WebForms don't play well with constructor injection or ServiceLocator.  Had to use
+        //a 3rd party package to handle the buildup of dependencies so that things would fire at the correct
+        //point in the page lifecycle.  Unfortunately, this couples Unity to our web page.  Still beats direct instantiation.
+        [Dependency]
+        public IMovieService MovieService { get; set; }
+        [Dependency]
+        public IGenreService GenreService { get; set; }
+
         private const int NumMoviesPerGenre = 5;
         private Dictionary<int, List<Movie>> _topMoviesByGenreIds;
         protected void Page_Load(object sender, EventArgs e)
