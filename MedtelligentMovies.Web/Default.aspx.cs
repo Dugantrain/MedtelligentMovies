@@ -15,20 +15,17 @@ namespace MedtelligentMovies.Web
     {
         //WebForms don't play well with constructor injection so we'll just use ServiceLocator.
         //Nothing here is mockable anyway, so we're not missing out on a whole lot.
-        private IMovieService _movieService;
-        private IGenreService _genreService;
+        private static readonly IMovieService MovieService = ServiceLocator.Current.GetInstance<IMovieService>();
+        private static readonly IGenreService GenreService = ServiceLocator.Current.GetInstance<IGenreService>();
         private const int NumMoviesPerGenre = 5;
         private Dictionary<int, List<Movie>> _topMoviesByGenreIds;
         protected void Page_Load(object sender, EventArgs e)
         {
-            _movieService = ServiceLocator.Current.GetInstance<IMovieService>();
-            _genreService = ServiceLocator.Current.GetInstance<IGenreService>();
-
             if (!Page.IsPostBack)
             {
-                var genres = _genreService.GetGenres(0, 5);
+                var genres = GenreService.GetGenres(0, 5);
                 var genreIds = genres.Select(g => g.Id).ToArray();
-                var topMoviesByGenreIds = _movieService.GetTopMoviesByGenreIds(genreIds, NumMoviesPerGenre);
+                var topMoviesByGenreIds = MovieService.GetTopMoviesByGenreIds(genreIds, NumMoviesPerGenre);
                 _topMoviesByGenreIds = topMoviesByGenreIds;
                 gvGenres.DataSource = genres;
                 gvGenres.DataBind();
