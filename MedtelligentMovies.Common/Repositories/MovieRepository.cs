@@ -8,8 +8,9 @@ namespace MedtelligentMovies.Common.Repositories
 {
     public interface IMovieRepository : IRepository
     {
-        Movie GetMovieById(int id);
+        Movie GetMovieById(int movieId);
         Dictionary<int, IEnumerable<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults);
+        IEnumerable<Movie> GetMoviesByGenreId(int genreId);
         Movie AddMovie(Movie movie);
         Movie UpdateMovie(Movie movie);
         void DeleteMovie(int movieId);
@@ -21,19 +22,25 @@ namespace MedtelligentMovies.Common.Repositories
         {
             _medtelligentMovieContext = medtelligentMovieContext;
         }
-        public Movie GetMovieById(int id)
+        public Movie GetMovieById(int movieId)
         {
-            return _medtelligentMovieContext.Movies.Find(id);
+            return _medtelligentMovieContext.Movies.Find(movieId);
         }
 
+        //This will send one SELECT to the server w/out performing an N+1 for each genre.
+        //EF officially rocks my face.
         public Dictionary<int,IEnumerable<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults)
         {
-            var ordering = genreIds.Select((id, index) => new {id, index});
             return _medtelligentMovieContext.Movies
                 .Where(m => genreIds.Contains(m.Genre.Id))
                 .GroupBy(m => m.Genre.Id)
                 .Select(group => new{genreId = group.Key,movies = group.OrderByDescending(mv => mv.ReleaseDate)
                     .Take(topResults)}).ToDictionary(k=>k.genreId,v=>v.movies);
+        }
+
+        public IEnumerable<Movie> GetMoviesByGenreId(int genreId)
+        {
+            return _medtelligentMovieContext.Movies.Where(m => m.Genre.Id == genreId);
         }
 
         public Movie AddMovie(Movie movie)

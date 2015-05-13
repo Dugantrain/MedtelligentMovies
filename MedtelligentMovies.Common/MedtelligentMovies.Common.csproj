@@ -57,6 +57,9 @@
     <Compile Include="Repositories\GenreRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\MovieRepository.cs" />
+    <Compile Include="Services\GenreService.cs" />
+    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\MovieService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

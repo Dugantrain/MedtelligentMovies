@@ -10,7 +10,7 @@ namespace MedtelligentMovies.Web.Configuration
     {
         //Sets up Unity as our DI and provides a layer of abstraction between
         //it and ServiceLocator.
-        public static void ConfigureUnityContainer()
+        public static void ConfigureServiceLocator()
         {
             var container = new UnityContainer();
                 container.RegisterTypes(
@@ -20,11 +20,6 @@ namespace MedtelligentMovies.Web.Configuration
                    WithLifetime.ContainerControlled);
             var unityServiceLocator = new UnityServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => unityServiceLocator);
-            var genres = ServiceLocator.Current.GetInstance<IGenreRepository>().GetGenres(0, 5);
-            //var genres = container.Resolve<IGenreRepository>().GetGenres(0,5);
-            var genreIds = genres.Select(g => g.Id).ToArray();
-            var movieRepository = container.Resolve<IMovieRepository>();
-            var moviesByGenre = movieRepository.GetTopMoviesByGenreIds(genreIds, 5);
         }
     }
 }

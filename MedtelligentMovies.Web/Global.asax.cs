@@ -15,7 +15,7 @@ namespace MedtelligentMovies.Web
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
-            Bootstrapper.ConfigureUnityContainer();
+            Bootstrapper.ConfigureServiceLocator();
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterOpenAuth();
             RouteConfig.RegisterRoutes(RouteTable.Routes);

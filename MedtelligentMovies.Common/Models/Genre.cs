@@ -18,7 +18,6 @@ namespace MedtelligentMovies.Common.Models
         [MaxLength(500)]
         [Index("IX_Genre_TitleDescription", 2)]
         public string Description { get; set; }
-        public IEnumerable<Movie> Movies { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public int CreatedByUserId { get; set; }
