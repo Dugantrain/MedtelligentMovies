@@ -8,10 +8,10 @@ using MedtelligentMovies.Common.Repositories;
 
 namespace MedtelligentMovies.Common.Services
 {
-    public interface IMovieService : IService
+    public interface IMovieService //: IService
     {
         Movie GetMovieById(int movieId);
-        Dictionary<int, IEnumerable<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults);
+        Dictionary<int, List<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults);
         IEnumerable<Movie> GetMoviesByGenreId(int genreId);
         Movie Create(Movie movie);
         Movie ChangeTitle(int movieId, string currentTitle);
@@ -31,7 +31,7 @@ namespace MedtelligentMovies.Common.Services
             return _movieRepository.GetMovieById(movieId);
         }
 
-        public Dictionary<int, IEnumerable<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults)
+        public Dictionary<int, List<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults)
         {
             return _movieRepository.GetTopMoviesByGenreIds(genreIds, topResults);
         }

@@ -8,10 +8,10 @@ using MedtelligentMovies.Common.Repositories;
 
 namespace MedtelligentMovies.Common.Services
 {
-    public interface IGenreService : IService
+    public interface IGenreService //: IService
     {
         Genre GetGenreById(int genreId);
-        IEnumerable<Genre> GetGenres(int startIndex, int numResults);
+        IList<Genre> GetGenres(int startIndex, int numResults);
         Genre Create(Genre genre);
         Genre ChangeTitle(int genreId, string title);
         Genre ChangeDescription(int genreId, string description);
@@ -32,9 +32,9 @@ namespace MedtelligentMovies.Common.Services
             return _genreRepository.GetGenreById(genreId);
         }
 
-        public IEnumerable<Genre> GetGenres(int startIndex, int numResults)
+        public IList<Genre> GetGenres(int startIndex, int numResults)
         {
-            return _genreRepository.GetGenres(startIndex, numResults);
+            return _genreRepository.GetGenres(startIndex, numResults).ToList();
         }
 
         public Genre Create(Genre genre)
