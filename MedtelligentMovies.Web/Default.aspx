@@ -36,7 +36,7 @@
             <a href="http://go.microsoft.com/fwlink/?LinkId=245143">Learn more…</a>
         </li>
     </ol>
-    <asp:GridView ID="gvGenres" AutoGenerateColumns="false" OnRowDataBound="gvGenres_RowDataBound" runat="server">
+    <asp:GridView CssClass="" ID="gvGenres" AutoGenerateColumns="false" OnRowDataBound="gvGenres_RowDataBound" runat="server">
         <Columns>
             <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
             <asp:BoundField DataField="Title"/>

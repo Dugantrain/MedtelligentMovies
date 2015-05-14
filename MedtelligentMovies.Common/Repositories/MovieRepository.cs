@@ -14,6 +14,7 @@ namespace MedtelligentMovies.Common.Repositories
         Movie AddMovie(Movie movie);
         Movie UpdateMovie(Movie movie);
         void DeleteMovie(int movieId);
+        IEnumerable<Movie> GetMoviesBySearchText(string searchText);
     }
     public class MovieRepository : IMovieRepository
     {
@@ -65,6 +66,13 @@ namespace MedtelligentMovies.Common.Repositories
             if (originalMovie == null) return;
             _medtelligentMovieContext.Movies.Remove(originalMovie);
             _medtelligentMovieContext.SaveChanges();
+        }
+
+        public IEnumerable<Movie> GetMoviesBySearchText(string searchText)
+        {
+            //This would perform horribly if we were dealing with any amount of data that mattered.
+            //Generally, we'd want to move this off into a read store like Eclipse or Mongo.
+            return _medtelligentMovieContext.Movies.Where(m => m.Title.ToLower().StartsWith(searchText.ToLower()));
         }
     }
 }
