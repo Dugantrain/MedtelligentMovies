@@ -67,29 +67,39 @@
                         <li><asp:textbox id="txtMovieSearch" runat="server"/></li>
                         <li><a runat="server" href="~/">Home</a></li>
                         <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
                     </ul>
                 </nav>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $('#txtMovieSearch').autocomplete({
                             source: function (request, response) {
-                                var autocompleteUrl = 'api/MovieSearch' + '?searchText=' + request.term;
+                                var autocompleteUrl = 'api/MovieSearch?searchText=' + request.term;
                                 $.ajax({
                                     url: autocompleteUrl,
                                     type: 'GET',
                                     cache: false,
                                     dataType: 'json',
                                     success: function (json) {
-                                        response($.map(json, function (data, id) {
-                                            return {
-                                                label: data.Title,
-                                                value: data.Title
-                                            };
-                                        }));
+                                        if (!json.length) {
+                                            var result = [
+                                               {
+                                                   label: 'No movies found.',
+                                                   value: response.term
+                                               }
+                                            ];
+                                            response(result);
+                                        }
+                                        else {
+                                            response($.map(json, function (data, id) {
+                                                return {
+                                                    label: data.Title,
+                                                    value: data.Id
+                                                };
+                                            }));
+                                        }
                                     },
                                     error: function (xmlHttpRequest, textStatus, errorThrown) {
-                                        console.log('some error occured', textStatus, errorThrown);
+                                        console.log('An error occured:', textStatus, errorThrown);
                                     }
                                 });
                             },
@@ -102,7 +112,7 @@
                             }
                         });
                     });
-</script>  
+            </script>  
             </div>
         </div>
     </header>

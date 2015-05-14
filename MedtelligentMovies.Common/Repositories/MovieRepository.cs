@@ -79,6 +79,7 @@ namespace MedtelligentMovies.Common.Repositories
             var filteredMovieIds = new List<int>();
             foreach (var movieWithKeywords in allMoviesWithKeywords)
             {
+                //Keyword search.  Basically, any movie with a word in the title that begins with the search text is returned.
                 if (movieWithKeywords.Value.Any(v => v.StartsWith(searchText)))
                 {
                     filteredMovieIds.Add(movieWithKeywords.Key);
