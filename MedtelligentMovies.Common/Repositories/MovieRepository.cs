@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using MedtelligentMovies.Common.DAL.DbContexts;
@@ -72,7 +73,18 @@ namespace MedtelligentMovies.Common.Repositories
         {
             //This would perform horribly if we were dealing with any amount of data that mattered.
             //Generally, we'd want to move this off into a read store like Eclipse or Mongo.
-            return _medtelligentMovieContext.Movies.Where(m => m.Title.ToLower().StartsWith(searchText.ToLower()));
+            searchText = searchText.ToLower();
+            var allMoviesWithKeywords = 
+                _medtelligentMovieContext.Movies.ToDictionary(movie => movie.Id, movie => movie.Title.ToLower().Split(' '));
+            var filteredMovieIds = new List<int>();
+            foreach (var movieWithKeywords in allMoviesWithKeywords)
+            {
+                if (movieWithKeywords.Value.Any(v => v.StartsWith(searchText)))
+                {
+                    filteredMovieIds.Add(movieWithKeywords.Key);
+                }
+            }
+            return _medtelligentMovieContext.Movies.Where(m => filteredMovieIds.Any(f => f == m.Id)).OrderBy(m => m.Title);
         }
     }
 }
