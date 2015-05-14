@@ -38,6 +38,7 @@ namespace MedtelligentMovies.Web
                WithMappings.FromMatchingInterface,
                WithName.Default,
                WithLifetime.Hierarchical);
+            UnityConfig.RegisterComponents(container);
             var unityServiceLocator = new UnityServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => unityServiceLocator);
 		}
