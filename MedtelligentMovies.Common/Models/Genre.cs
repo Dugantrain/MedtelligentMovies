@@ -18,6 +18,8 @@ namespace MedtelligentMovies.Common.Models
         [MaxLength(500)]
         [Index("IX_Genre_TitleDescription", 2)]
         public string Description { get; set; }
+        //Store the number of assoc. movies so we don't need to fetch every time.
+        public int NumMovies { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         public int CreatedByUserId { get; set; }

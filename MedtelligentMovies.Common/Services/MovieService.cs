@@ -23,9 +23,11 @@ namespace MedtelligentMovies.Common.Services
     public class MovieService : IMovieService
     {
         private readonly IMovieRepository _movieRepository;
-        public MovieService(IMovieRepository movieRepository)
+        private readonly IGenreRepository _genreRepository;
+        public MovieService(IMovieRepository movieRepository, IGenreRepository genreRepository)
         {
             _movieRepository = movieRepository;
+            _genreRepository = genreRepository;
         }
         public Movie GetMovieById(int movieId)
         {
@@ -44,7 +46,12 @@ namespace MedtelligentMovies.Common.Services
 
         public Movie Create(Movie movie)
         {
-            return _movieRepository.AddMovie(movie);
+            var genreId = movie.Genre.Id;
+            movie = _movieRepository.AddMovie(movie);
+            var numMovies = GetMoviesByGenreId(genreId).Count();
+            movie.Genre.NumMovies = numMovies;
+            _genreRepository.UpdateGenre(movie.Genre);
+            return movie;
         }
 
         public Movie ChangeTitle(int movieId, string currentTitle)
@@ -73,7 +80,13 @@ namespace MedtelligentMovies.Common.Services
 
         public void DeleteMovie(int movieId)
         {
+            var movie = GetMovieById(movieId);
             _movieRepository.DeleteMovie(movieId);
+            if (movie != null)
+            {
+                movie.Genre.NumMovies = GetMoviesByGenreId(movie.Genre.Id).Count();
+                _genreRepository.UpdateGenre(movie.Genre);
+            }
         }
 
         public IEnumerable<Movie> GetMoviesBySearchText(string searchText)

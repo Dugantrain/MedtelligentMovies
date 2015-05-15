@@ -4,12 +4,25 @@ using System.Linq;
 using System.Reflection;
 using MedtelligentMovies.Common.DAL.DbContexts;
 using MedtelligentMovies.Common.Models;
+using MedtelligentMovies.Common.Services;
 
 namespace MedtelligentMovies.Common.DAL.Initializers
 {
+    public interface IMedtelligentMovieDbInitializer
+    {
+        void Seed(MedtelligentMovieDbContext medtelligentMovieContext);
+    }
     public class MedtelligentMovieDbInitializer : 
         System.Data.Entity.CreateDatabaseIfNotExists<MedtelligentMovieDbContext>
     {
+        private readonly IGenreService _genreService;
+        private readonly IMovieService _movieService;
+
+        public MedtelligentMovieDbInitializer(IGenreService genreService, IMovieService movieService)
+        {
+            _genreService = genreService;
+            _movieService = movieService;
+        }
         protected override void Seed(MedtelligentMovieDbContext medtelligentMovieContext)
         {
             //Users
@@ -28,36 +41,68 @@ namespace MedtelligentMovies.Common.DAL.Initializers
             medtelligentMovieContext.SaveChanges();
 
             //Genres
-            var genres = new List<Genre>
-            {
-                new Genre{Title = "Comedy",Description = "Tee hee."},
-                new Genre{Title="Drama",Description="Dramatic stuff."}
-            };
-            genres.ForEach(g=>medtelligentMovieContext.Genres.Add(g));
-
-            medtelligentMovieContext.SaveChanges();
+            var comedyGenre = new Genre{Title = "Comedy", Description = "Tee hee."};
+            var dramaGenre = new Genre { Title = "Drama", Description = "Dramatic stuff." };
+            comedyGenre = _genreService.Create(comedyGenre);
+            dramaGenre = _genreService.Create(dramaGenre);
 
             //Movies
-            var movies = new List<Movie>
+            var comedyMovies = new List<Movie>
             {
-                new Movie{Title = "Stardust Memories",Genre = genres.FirstOrDefault(g=>g.Title == "Comedy"),Description="Woody Allen plays Sandy Bates, a film-maker attending a retrospective of his works.",ReleaseDate = new DateTime(1980,9,26)},
-                new Movie{Title = "Ghostbusters",Genre = genres.FirstOrDefault(g=>g.Title == "Comedy"),Description="Madcap undead antics in New York.",ReleaseDate = new DateTime(1984,6,1)},
-                new Movie{Title = "Dr. Strangelove",Genre = genres.FirstOrDefault(g=>g.Title == "Comedy"),Description="Something about a bomb.",ReleaseDate = new DateTime(1964,1,29)},
-                new Movie{Title = "a",Genre = genres.FirstOrDefault(g=>g.Title == "Comedy"),Description="Something about a bomb.",ReleaseDate = new DateTime(1954,1,29)},
-                new Movie{Title = "b",Genre = genres.FirstOrDefault(g=>g.Title == "Comedy"),Description="Something about a bomb.",ReleaseDate = new DateTime(1922,1,29)},
-                new Movie{Title = "c",Genre = genres.FirstOrDefault(g=>g.Title == "Comedy"),Description="Something about a bomb.",ReleaseDate = new DateTime(1933,1,29)},
-
-
-                new Movie{Title = "1",Genre = genres.FirstOrDefault(g=>g.Title == "Drama"),Description="1",ReleaseDate = new DateTime(1980,9,26)},
-                new Movie{Title = "2",Genre = genres.FirstOrDefault(g=>g.Title == "Drama"),Description="2",ReleaseDate = new DateTime(1970,9,26)},
-                new Movie{Title = "3",Genre = genres.FirstOrDefault(g=>g.Title == "Drama"),Description="3",ReleaseDate = new DateTime(1960,9,26)},
-                new Movie{Title = "4",Genre = genres.FirstOrDefault(g=>g.Title == "Drama"),Description="4",ReleaseDate = new DateTime(1950,9,26)},
-                new Movie{Title = "5",Genre = genres.FirstOrDefault(g=>g.Title == "Drama"),Description="5",ReleaseDate = new DateTime(1940,9,26)},
-                new Movie{Title = "6",Genre = genres.FirstOrDefault(g=>g.Title == "Drama"),Description="6",ReleaseDate = new DateTime(1930,9,26)},
-                new Movie{Title = "7",Genre = genres.FirstOrDefault(g=>g.Title == "Drama"),Description="7",ReleaseDate = new DateTime(1920,9,26)}
+                new Movie
+                {
+                    Title = "Stardust Memories",
+                    Genre = comedyGenre,
+                    Description = "Woody Allen plays Sandy Bates, a film-maker attending a retrospective of his works.",
+                    ReleaseDate = new DateTime(1980, 9, 26)
+                },
+                new Movie
+                {
+                    Title = "Ghostbusters",
+                    Genre = comedyGenre,
+                    Description = "Madcap undead antics in New York.",
+                    ReleaseDate = new DateTime(1984, 6, 1)
+                },
+                new Movie
+                {
+                    Title = "Dr. Strangelove",
+                    Genre = comedyGenre,
+                    Description = "Something about a bomb.",
+                    ReleaseDate = new DateTime(1964, 1, 29)
+                },
+                new Movie
+                {
+                    Title = "Bill & Ted's Excellent Adventure",
+                    Genre = comedyGenre,
+                    Description = "Folks crowd into a phone booth.",
+                    ReleaseDate = new DateTime(1989, 7, 14)
+                },
+                new Movie
+                {
+                    Title = "b",
+                    Genre = comedyGenre,
+                    Description = "Something about a bomb.",
+                    ReleaseDate = new DateTime(1922, 1, 29)
+                },
+                new Movie
+                {
+                    Title = "c",
+                    Genre = comedyGenre,
+                    Description = "Something about a bomb.",
+                    ReleaseDate = new DateTime(1933, 1, 29)
+                }
             };
-            movies.ForEach(m=>medtelligentMovieContext.Movies.Add(m));
-            medtelligentMovieContext.SaveChanges();
+            comedyMovies.ForEach(m =>_movieService.Create(m));
+           var dramaMovies = new List<Movie>
+           {    new Movie{Title = "1",Genre = dramaGenre,Description="1",ReleaseDate = new DateTime(1980,9,26)},
+                new Movie{Title = "2",Genre = dramaGenre,Description="2",ReleaseDate = new DateTime(1970,9,26)},
+                new Movie{Title = "3",Genre = dramaGenre,Description="3",ReleaseDate = new DateTime(1960,9,26)},
+                new Movie{Title = "4",Genre = dramaGenre,Description="4",ReleaseDate = new DateTime(1950,9,26)},
+                new Movie{Title = "5",Genre = dramaGenre,Description="5",ReleaseDate = new DateTime(1940,9,26)},
+                new Movie{Title = "6",Genre = dramaGenre,Description="6",ReleaseDate = new DateTime(1930,9,26)},
+                new Movie{Title = "7",Genre = dramaGenre,Description="7",ReleaseDate = new DateTime(1920,9,26)}
+            };
+           dramaMovies.ForEach(m =>_movieService.Create(m));
         }
     }
 }
