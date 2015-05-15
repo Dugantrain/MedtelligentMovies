@@ -8,7 +8,7 @@ using MedtelligentMovies.Common.Repositories;
 
 namespace MedtelligentMovies.Common.Services
 {
-    public interface IGenreService //: IService
+    public interface IGenreService : IService
     {
         Genre GetGenreById(int genreId);
         IList<Genre> GetGenres(int startIndex, int numResults);

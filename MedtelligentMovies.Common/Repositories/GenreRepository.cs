@@ -9,7 +9,7 @@ using MedtelligentMovies.Common.Models;
 
 namespace MedtelligentMovies.Common.Repositories
 {
-    public interface IGenreRepository //: IRepository
+    public interface IGenreRepository : IRepository
     {
         Genre GetGenreById(int genreId);
         IEnumerable<Genre> GetGenres(int startIndex, int numResults);

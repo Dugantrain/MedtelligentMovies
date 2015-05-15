@@ -8,7 +8,7 @@ using MedtelligentMovies.Common.Repositories;
 
 namespace MedtelligentMovies.Common.Services
 {
-    public interface IMovieService //: IService
+    public interface IMovieService : IService
     {
         Movie GetMovieById(int movieId);
         Dictionary<int, List<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults);

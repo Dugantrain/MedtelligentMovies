@@ -7,7 +7,7 @@ using MedtelligentMovies.Common.Models;
 
 namespace MedtelligentMovies.Common.Repositories
 {
-    public interface IMovieRepository //: IRepository
+    public interface IMovieRepository : IRepository
     {
         Movie GetMovieById(int movieId);
         Dictionary<int, List<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults);
@@ -36,6 +36,8 @@ namespace MedtelligentMovies.Common.Repositories
             return _medtelligentMovieContext.Movies
                 .Where(m => genreIds.Contains(m.Genre.Id))
                 .GroupBy(m => m.Genre.Id)
+                //The downside, of course, is that you'd never know what the Hell this was doing
+                //without running Sql Profiler (or you could ask me but after a couple of days I'd have no idea either).
                 .Select(group => new{genreId = group.Key,movies = group.OrderByDescending(mv => mv.ReleaseDate)
                     .Take(topResults)}).ToDictionary(k=>k.genreId,v=>v.movies.ToList());
         }

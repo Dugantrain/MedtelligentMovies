@@ -7,7 +7,6 @@ using System.Web.UI.WebControls;
 using MedtelligentMovies.Common.Models;
 using MedtelligentMovies.Common.Repositories;
 using MedtelligentMovies.Common.Services;
-using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 
 namespace MedtelligentMovies.Web
@@ -41,6 +40,8 @@ namespace MedtelligentMovies.Web
         {
             if (e.Row.RowType != DataControlRowType.DataRow) return;
             var genreId = ((Genre)e.Row.DataItem).Id;
+            //Check it out.  I got EF to return each genre and their top 5 most recent movies
+            //in one query.  The Linq query below just attaches the right grouping of movies to their corresponding genre.
             var topMovies = _topMoviesByGenreIds.Single(m => m.Key == genreId).Value;
             var gvTopMovies = (GridView)e.Row.FindControl("gvTopMovies");
             gvTopMovies.DataSource = topMovies;
