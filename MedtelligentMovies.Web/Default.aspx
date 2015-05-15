@@ -1,17 +1,15 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="MedtelligentMovies.Web.Default" %>
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Public.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="MedtelligentMovies.Web.Default" %>
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
                 <h1>Top 5 Movies by Genre</h1>
-                <h2>Top 5 Movies by Genre</h2>
             </hgroup>
         </div>
     </section>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <h3>Top 5 Movies Genre:</h3>
     <asp:GridView CssClass="" ID="gvGenres" AutoGenerateColumns="false" OnRowDataBound="gvGenres_RowDataBound" runat="server">
         <Columns>
             <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>

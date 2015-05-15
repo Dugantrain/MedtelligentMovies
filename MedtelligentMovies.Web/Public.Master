@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="MedtelligentMovies.Web.SiteMaster" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Public.Master.cs" Inherits="MedtelligentMovies.Web.SiteMaster" %>
 
 <!DOCTYPE html>
 <html lang="en">
