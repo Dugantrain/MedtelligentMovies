@@ -7,9 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MedtelligentMovies.Web {
+namespace MedtelligentMovies.Web.Public {
     
     
     public partial class Default {
+        
+        /// <summary>
+        /// gvGenres control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvGenres;
     }
 }

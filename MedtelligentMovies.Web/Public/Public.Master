@@ -65,14 +65,13 @@
                     <ul id="menu">
                         <li><asp:textbox id="txtMovieSearch" runat="server"/></li>
                         <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
                     </ul>
                 </nav>
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $('#txtMovieSearch').autocomplete({
                             source: function (request, response) {
-                                var autocompleteUrl = 'api/MovieSearch?searchText=' + request.term;
+                                var autocompleteUrl = '/api/MovieSearch?searchText=' + request.term;
                                 $.ajax({
                                     url: autocompleteUrl,
                                     type: 'GET',
