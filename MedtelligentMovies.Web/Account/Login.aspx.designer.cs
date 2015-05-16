@@ -7,29 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MedtelligentMovies.Web.Account
-{
-
-
-    public partial class Login
-    {
-
+namespace MedtelligentMovies.Web.Account {
+    
+    
+    public partial class Login {
+        
         /// <summary>
-        /// RegisterHyperLink control.
+        /// lgMainLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink RegisterHyperLink;
-
-        /// <summary>
-        /// OpenAuthLogin control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::MedtelligentMovies.Web.Account.OpenAuthProviders OpenAuthLogin;
+        protected global::System.Web.UI.WebControls.Login lgMainLogin;
     }
 }

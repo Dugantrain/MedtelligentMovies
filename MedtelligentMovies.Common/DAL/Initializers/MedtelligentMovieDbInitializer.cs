@@ -32,7 +32,7 @@ namespace MedtelligentMovies.Common.DAL.Initializers
                         FirstName = "Chester",
                         LastName = "Administrator",
                         UserName = "MedMoviesAdmin",
-                        EncryptedPassword = "TODO:  Figure this out.",
+                        EncryptedPassword = "FBqHWZ3qHqsAx4UYbUUE0RWn6s4JKal1GbYT0ad+nr4=",
                         Email = "Admin@medtelligentmovies.com",
                         IsAdministrator = true
                         }

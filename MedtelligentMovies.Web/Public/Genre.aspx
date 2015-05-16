@@ -7,9 +7,9 @@
     <asp:GridView CssClass="" ID="gvMovies" AutoGenerateColumns="false" runat="server">
         <Columns>
             <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
-            <asp:BoundField DataField="Title"/>
-            <asp:BoundField DataField="Description"/>
-            <asp:BoundField DataField="ReleaseDate"/>
+            <asp:BoundField DataField="Title" HeaderText="Title"/>
+            <asp:BoundField DataField="Description" HeaderText="Description"/>
+            <asp:BoundField DataField="ReleaseDate" HeaderText="Release Date"/>
         </Columns>
     </asp:GridView>
 </asp:Content>

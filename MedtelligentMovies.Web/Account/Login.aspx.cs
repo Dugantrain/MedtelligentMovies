@@ -1,24 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using MedtelligentMovies.Common.Extensions;
+using MedtelligentMovies.Common.Services;
+using Microsoft.Practices.Unity;
 
 namespace MedtelligentMovies.Web.Account
 {
     public partial class Login : Page
     {
+        [Dependency]
+        public IUserService UserService { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            RegisterHyperLink.NavigateUrl = "Register";
-            OpenAuthLogin.ReturnUrl = Request.QueryString["ReturnUrl"];
+            if(HttpContext.Current.User.Identity.IsAuthenticated)Response.Redirect("~/Admin/ManageGenres.aspx");
+        }
 
-            var returnUrl = HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
-            if (!String.IsNullOrEmpty(returnUrl))
+        protected void OnAuthenticate(object sender, AuthenticateEventArgs e)
+        {
+            var isAuthenticated = false;
+            var user = UserService.GetUserByUsername(lgMainLogin.UserName);
+            if (user != null)
             {
-                RegisterHyperLink.NavigateUrl += "?ReturnUrl=" + returnUrl;
+                if (user.EncryptedPassword == lgMainLogin.Password.Encrypt())
+                {
+                    isAuthenticated = true;
+
+                }
             }
+            e.Authenticated = isAuthenticated;
         }
     }
 }
