@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using MedtelligentMovies.Common.DAL.DbContexts;
@@ -15,6 +16,7 @@ namespace MedtelligentMovies.Common.Repositories
         User GetUserById(int userId);
         User GetUserByUsername(string userName);
         void DeleteUser(int userId);
+        IEnumerable<User> GetUsers(int startIndex, int numResults);
     }
 
     public class UserRepository : IUserRepository
@@ -54,6 +56,11 @@ namespace MedtelligentMovies.Common.Repositories
             if (userToDelete == null) return;
             _medtelligentMovieContext.Users.Remove(userToDelete);
             _medtelligentMovieContext.SaveChanges();
+        }
+
+        public IEnumerable<User> GetUsers(int startIndex, int numResults)
+        {
+            return _medtelligentMovieContext.Users.OrderBy(u => u.UserName).ToList();
         }
 
         public User GetUserByEmail(string email)

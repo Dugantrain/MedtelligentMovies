@@ -27,10 +27,11 @@ namespace MedtelligentMovies.Web.Account
                 if (user.EncryptedPassword == lgMainLogin.Password.Encrypt())
                 {
                     isAuthenticated = true;
-
+                    FormsAuthentication.SetAuthCookie(user.UserName,lgMainLogin.RememberMeSet);
                 }
             }
             e.Authenticated = isAuthenticated;
+            if (isAuthenticated) Response.Redirect("~/Admin/ManageGenres.aspx");
         }
     }
 }
