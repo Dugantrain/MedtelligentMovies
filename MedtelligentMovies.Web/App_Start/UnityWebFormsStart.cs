@@ -46,7 +46,7 @@ namespace MedtelligentMovies.Web
             ServiceLocator.SetLocatorProvider(() => unityServiceLocator);
 
             var context = new MedtelligentMovieDbContext();
-            Database.SetInitializer<MedtelligentMovieDbContext>(ServiceLocator.Current.GetInstance<MedtelligentMovieDbInitializer>());
+            Database.SetInitializer(ServiceLocator.Current.GetInstance<MedtelligentMovieDbInitializer>());
             context.Database.Initialize(false);
 		}
 	}

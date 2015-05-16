@@ -30,7 +30,7 @@ namespace MedtelligentMovies.Common.Repositories
         }
 
         //This will send one SELECT to the server w/out performing an N+1 for each genre.
-        //EF officially rocks my face.
+        //EF officially rocks my face.  Melts it, even.
         public Dictionary<int,List<Movie>> GetTopMoviesByGenreIds(int[] genreIds, int topResults)
         {
             return _medtelligentMovieContext.Movies
@@ -38,7 +38,7 @@ namespace MedtelligentMovies.Common.Repositories
                 .GroupBy(m => m.Genre.Id)
                 //The downside, of course, is that you'd never know what the Hell this was doing
                 //without running Sql Profiler (or you could ask me but after a couple of days I'd have no idea either).
-                .Select(group => new{genreId = group.Key,movies = group.OrderByDescending(mv => mv.ReleaseDate)
+                .Select(group => new{genreId = group.Key,movies = group.OrderByDescending(mv => mv.CreatedDate)
                     .Take(topResults)}).ToDictionary(k=>k.genreId,v=>v.movies.ToList());
         }
 

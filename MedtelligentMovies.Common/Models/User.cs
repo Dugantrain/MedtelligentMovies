@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MedtelligentMovies.Common.Models
 {
-    //TODO:  Immutability!  All up on your tonsils!
     /// <summary>
     /// Summary description for User
     /// </summary>
@@ -13,6 +12,8 @@ namespace MedtelligentMovies.Common.Models
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [MaxLength(50)]
+        [Index(IsUnique = true)]
         public string Email { get; set; }
         [MaxLength(50)]
         [Index(IsUnique = true)]

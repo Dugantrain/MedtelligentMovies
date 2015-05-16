@@ -35,8 +35,6 @@ namespace MedtelligentMovies.Common.Repositories
             return _medtelligentMovieContext.Genres.OrderBy(g => g.Title)
                 //Page the Genres
                 .Skip(startIndex).Take(numResults);
-            //Pull back the n most recently created.
-            //.Include(g => g.Movies.OrderByDescending(m => m.CreatedDate).Take(numTopMovies).Select(m => m));
         }
 
         public Genre AddGenre(Genre genre)

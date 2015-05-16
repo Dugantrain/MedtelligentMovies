@@ -11,7 +11,7 @@ namespace MedtelligentMovies.Web.Public
         public IMovieService MovieService { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Another issue with webforms:  No url routing w/out a special handler.
+            //So here's something:  With webforms, no url routing w/out a special handler.
             //Hanging the id off the querystring like I'm doing here is not optimized for SEO.
             if (!Page.IsPostBack)
             {
