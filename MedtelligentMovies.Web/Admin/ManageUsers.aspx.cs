@@ -13,7 +13,8 @@ namespace MedtelligentMovies.Web.Admin
         [Dependency]
         public IUserService UserService { get; set; }
 
-        private IEnumerable<User> _users; 
+        private IEnumerable<User> _users;
+        private bool isUserNameValid = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -37,8 +38,9 @@ namespace MedtelligentMovies.Web.Admin
             if (existingUser != null)
             {
                 arguments.IsValid = false;
+                return;
             }
-
+            isUserNameValid = true;
         }
 
         protected void InsertButton_Click(object sender, EventArgs e)
@@ -48,7 +50,8 @@ namespace MedtelligentMovies.Web.Admin
                String.IsNullOrEmpty(txtPassword.Text) ||
                String.IsNullOrEmpty(txtEmail.Text) ||
                String.IsNullOrEmpty(txtFirstName.Text) ||
-               String.IsNullOrEmpty(txtLastName.Text)) { return; }
+               String.IsNullOrEmpty(txtLastName.Text) || 
+                !isUserNameValid) { return; }
 
             var user = new User
             {

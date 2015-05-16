@@ -7,7 +7,7 @@ using MedtelligentMovies.Common.Services;
 
 namespace MedtelligentMovies.Web.UserContext
 {
-    
+    //A web-specific implementation of the IUserContextService
     public class HttpUserContextService : IUserContextService
     {
         public string GetUserName()

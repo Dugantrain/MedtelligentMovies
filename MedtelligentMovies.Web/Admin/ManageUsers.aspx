@@ -31,9 +31,8 @@
                               </td>
                               <td><asp:TextBox runat="server" ID="txtUserName" /></td>
                               <td>
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name is required." />
-                                  <asp:CustomValidator runat="server" OnServerValidate="UsernameValidation" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name already exists." />
-
+                                <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name is required." />
+                                <asp:CustomValidator runat="server" Display="Dynamic" SetFocusOnError="True" OnServerValidate="UsernameValidation" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name already exists." />
                               </td>
                             </tr>
                             <tr>
@@ -49,8 +48,8 @@
                                              Text="Email" /></td>
                               <td><asp:TextBox runat="server" ID="txtEmail" /></td>
                                 <td>
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="field-validation-error" ErrorMessage="Email is required." />
-                                  <asp:RegularExpressionValidator ID="regexEmailValid" runat="server" CssClass="field-validation-error" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ErrorMessage="Invalid Email Format."></asp:RegularExpressionValidator>
+                                  <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="txtEmail" CssClass="field-validation-error" ErrorMessage="Email is required." />
+                                  <asp:RegularExpressionValidator ID="regexEmailValid" Display="Dynamic" runat="server" CssClass="field-validation-error" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ErrorMessage="Invalid Email Format."></asp:RegularExpressionValidator>
                               </td>
                             </tr>
                             <tr>
