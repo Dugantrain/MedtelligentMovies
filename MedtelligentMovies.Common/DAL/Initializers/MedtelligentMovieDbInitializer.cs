@@ -15,11 +15,13 @@ namespace MedtelligentMovies.Common.DAL.Initializers
     public class MedtelligentMovieDbInitializer : 
         System.Data.Entity.CreateDatabaseIfNotExists<MedtelligentMovieDbContext>
     {
+        private readonly IUserService _userService;
         private readonly IGenreService _genreService;
         private readonly IMovieService _movieService;
 
-        public MedtelligentMovieDbInitializer(IGenreService genreService, IMovieService movieService)
+        public MedtelligentMovieDbInitializer(IUserService userService,IGenreService genreService, IMovieService movieService)
         {
+            _userService = userService;
             _genreService = genreService;
             _movieService = movieService;
         }
@@ -37,8 +39,7 @@ namespace MedtelligentMovies.Common.DAL.Initializers
                         IsAdministrator = true
                         }
             };
-            users.ForEach(u=>medtelligentMovieContext.Users.Add(u));
-            medtelligentMovieContext.SaveChanges();
+            users.ForEach(u=>_userService.Create(u));
 
             //Genres
             var comedyGenre = new Genre{Title = "Comedy", Description = "Tee hee."};
