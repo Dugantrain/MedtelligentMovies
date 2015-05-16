@@ -12,7 +12,7 @@
                              <tr>
                               <td><asp:Label ID="lblFirstName" runat="server" AssociatedControlID="txtFirstName" 
                                              Text="First Name" /></td>
-                              <td><asp:TextBox runat="server" ID="txtFirstName" /></td>
+                              <td><asp:TextBox runat="server" MaxLength="50" ID="txtFirstName" /></td>
                                 <td>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtFirstName" CssClass="field-validation-error" ErrorMessage="First Name is required." />
                               </td>
@@ -20,7 +20,7 @@
                             <tr>
                               <td><asp:Label ID="lblLastName" runat="server" AssociatedControlID="txtLastName" 
                                              Text="Last Name" /></td>
-                              <td><asp:TextBox runat="server" ID="txtLastName" /></td>
+                              <td><asp:TextBox MaxLength="50" runat="server" ID="txtLastName" /></td>
                                 <td>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLastName" CssClass="field-validation-error" ErrorMessage="Last Name is required." />
                               </td>
@@ -29,16 +29,16 @@
                               <td><asp:Label ID="lblUserName" runat="server" AssociatedControlID="txtUserName" 
                                              Text="User Name" />
                               </td>
-                              <td><asp:TextBox runat="server" ID="txtUserName" /></td>
+                              <td><asp:TextBox MaxLength="20" runat="server" ID="txtUserName" /></td>
                               <td>
                                 <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name is required." />
-                                <asp:CustomValidator runat="server" Display="Dynamic" SetFocusOnError="True" OnServerValidate="UsernameValidation" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name already exists." />
+                                <asp:CustomValidator runat="server" Display="Dynamic" SetFocusOnError="True" OnServerValidate="UsernameUniqueValidation" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name already exists." />
                               </td>
                             </tr>
                             <tr>
                               <td><asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword" 
                                              Text="Password" /></td>
-                              <td><asp:TextBox runat="server" ID="txtPassword" /></td>
+                              <td><asp:TextBox runat="server" ID="txtPassword" TextMode="Password" /></td>
                                 <td>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" CssClass="field-validation-error" ErrorMessage="Password is required." />
                               </td>

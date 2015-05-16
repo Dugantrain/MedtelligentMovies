@@ -9,6 +9,8 @@ namespace MedtelligentMovies.Web.Public
     {
         [Dependency]
         public IMovieService MovieService { get; set; }
+        [Dependency]
+        public IGenreService GenreService { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             //So here's something:  With webforms, no url routing w/out a special handler.
@@ -16,6 +18,8 @@ namespace MedtelligentMovies.Web.Public
             if (!Page.IsPostBack)
             {
                 var genreId = Convert.ToInt32(Request.QueryString["g"]);
+                var genre = GenreService.GetGenreById(genreId);
+                lblTitle.Text = genre.Title;
                 var movies = MovieService.GetMoviesByGenreId(genreId).ToList();
                 movies = movies.OrderBy(m => m.Title).ToList();
                 gvMovies.DataSource = movies;
