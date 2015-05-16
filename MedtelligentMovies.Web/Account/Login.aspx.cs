@@ -15,7 +15,7 @@ namespace MedtelligentMovies.Web.Account
         public IUserService UserService { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(HttpContext.Current.User.Identity.IsAuthenticated)Response.Redirect("~/Admin/ManageGenres.aspx");
+            if(HttpContext.Current.User.Identity.IsAuthenticated)Response.Redirect("~/Admin/ManageUsers.aspx");
         }
 
         protected void OnAuthenticate(object sender, AuthenticateEventArgs e)
@@ -31,7 +31,7 @@ namespace MedtelligentMovies.Web.Account
                 }
             }
             e.Authenticated = isAuthenticated;
-            if (isAuthenticated) Response.Redirect("~/Admin/ManageGenres.aspx");
+            if (isAuthenticated) Response.Redirect("~/Admin/ManageUsers.aspx");
         }
     }
 }
