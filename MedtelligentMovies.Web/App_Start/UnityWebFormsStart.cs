@@ -2,7 +2,9 @@ using System.Data.Entity;
 using System.Web;
 using MedtelligentMovies.Common.DAL.DbContexts;
 using MedtelligentMovies.Common.DAL.Initializers;
+using MedtelligentMovies.Common.Services;
 using MedtelligentMovies.Web;
+using MedtelligentMovies.Web.UserContext;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Unity.WebForms;
@@ -42,10 +44,12 @@ namespace MedtelligentMovies.Web
                WithName.Default,
                WithLifetime.Hierarchical);
             UnityConfig.RegisterComponents(container);
+		    container.RegisterType<IUserContextService, HttpUserContextService>();
             var unityServiceLocator = new UnityServiceLocator(container);
             ServiceLocator.SetLocatorProvider(() => unityServiceLocator);
 
-            var context = new MedtelligentMovieDbContext();
+		    var contextService = ServiceLocator.Current.GetInstance<IUserContextService>();
+            var context = new MedtelligentMovieDbContext(contextService);
             Database.SetInitializer(ServiceLocator.Current.GetInstance<MedtelligentMovieDbInitializer>());
             context.Database.Initialize(false);
 		}

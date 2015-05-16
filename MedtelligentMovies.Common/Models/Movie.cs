@@ -7,6 +7,7 @@ namespace MedtelligentMovies.Common.Models
     /// <summary>
     /// Summary description for Movie
     /// </summary>
+    [Serializable]
     public class Movie : IAuditable
     {
         public int Id { get; set; }

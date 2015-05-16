@@ -63,6 +63,7 @@
     <Compile Include="Repositories\MovieRepository.cs" />
     <Compile Include="Services\GenreService.cs" />
     <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\IUserContextService.cs" />
     <Compile Include="Services\MovieService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>

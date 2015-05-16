@@ -8,6 +8,7 @@ namespace MedtelligentMovies.Common.Models
     /// <summary>
     /// Summary description for Genre
     /// </summary>
+    [Serializable]
     public class Genre : IAuditable
     {
         public int Id { get; set; }

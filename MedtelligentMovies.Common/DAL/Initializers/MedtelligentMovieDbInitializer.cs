@@ -28,18 +28,16 @@ namespace MedtelligentMovies.Common.DAL.Initializers
         protected override void Seed(MedtelligentMovieDbContext medtelligentMovieContext)
         {
             //Users
-            var users = new List<User>
-            {
-                new User{
+            var user = new User{
                         FirstName = "Chester",
                         LastName = "Administrator",
                         UserName = "MedMoviesAdmin",
                         EncryptedPassword = "FBqHWZ3qHqsAx4UYbUUE0RWn6s4JKal1GbYT0ad+nr4=",
                         Email = "Admin@medtelligentmovies.com",
                         IsAdministrator = true
-                        }
-            };
-            users.ForEach(u=>_userService.Create(u));
+                        };
+
+            _userService.Create(user);
 
             //Genres
             var comedyGenre = new Genre{Title = "Comedy", Description = "Tee hee."};
