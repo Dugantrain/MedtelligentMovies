@@ -40,11 +40,11 @@
     <header>
         <style type="text/css">
              .ui-menu {
-     overflow: hidden;
+                 overflow: hidden;
                  list-style-type: none;
-     border: 1px solid #e2e2e2;
-                 width: 200px;
-     background:white
+                 border: 1px solid #e2e2e2;
+                 width: 270px;
+                 background:white
  }
              .ui-menu .ui-menu-item a {
                  margin-top: 35px !important;
