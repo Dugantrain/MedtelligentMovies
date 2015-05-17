@@ -15,6 +15,7 @@ namespace MedtelligentMovies.Common.Repositories
         User UpdateUser(User user);
         User GetUserById(int userId);
         User GetUserByUsername(string userName);
+        User GetUserByEmail(string email);
         void DeleteUser(int userId);
         IEnumerable<User> GetUsers(int startIndex, int numResults);
     }
@@ -47,7 +48,7 @@ namespace MedtelligentMovies.Common.Repositories
 
         public User GetUserByUsername(string userName)
         {
-            return _medtelligentMovieContext.Users.SingleOrDefault(u => u.UserName.ToLower() == userName);
+            return _medtelligentMovieContext.Users.SingleOrDefault(u => u.UserName == userName);
         }
 
         public void DeleteUser(int userId)
@@ -65,7 +66,7 @@ namespace MedtelligentMovies.Common.Repositories
 
         public User GetUserByEmail(string email)
         {
-            return _medtelligentMovieContext.Users.SingleOrDefault(u => u.Email.ToLower() == email);
+            return _medtelligentMovieContext.Users.SingleOrDefault(u => u.Email == email);
         }
     }
 }

@@ -2,11 +2,36 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="headContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" />
+    <style type="text/css">
+    .panel{
+        display:none;
+    }
+    </style>
         <table>
+           <tr>
+                <td style="height: 206px" valign="top">
+                    <asp:UpdatePanel ID="UserUpdatePanel" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false">
+                                <Columns>
+                                    <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
+                                    <asp:BoundField DataField="UserName"/>
+                                    <asp:BoundField DataField="Email"/>
+                                    <asp:BoundField DataField="FirstName"/>
+                                    <asp:BoundField DataField="LastName"/>
+                                </Columns>
+                                <PagerSettings PageButtonCount="5" />
+                            </asp:GridView>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="InsertButton" EventName="Click" />
+                        </Triggers>
+                    </asp:UpdatePanel>
+                </td>
+            </tr>
             <tr>
                 <td style="height: 206px" valign="top">
-                    <asp:UpdatePanel ID="InsertUserUpdatePanel" runat="server" UpdateMode="Conditional">
+                    <asp:UpdatePanel ID="InsertUserUpdatePanel"  runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                           <table>
                              <tr>
@@ -50,38 +75,30 @@
                                 <td>
                                   <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="txtEmail" CssClass="field-validation-error" ErrorMessage="Email is required." />
                                   <asp:RegularExpressionValidator ID="regexEmailValid" Display="Dynamic" runat="server" CssClass="field-validation-error" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ErrorMessage="Invalid Email Format."></asp:RegularExpressionValidator>
-                              </td>
+                                  <asp:CustomValidator runat="server" Display="Dynamic" SetFocusOnError="True" OnServerValidate="EmailUniqueValidation" ControlToValidate="txtEmail" CssClass="field-validation-error" ErrorMessage="Email already exists." />
+                                </td>
                             </tr>
                             <tr>
                               <td></td>
                               <td>
                                 <asp:Button ID="InsertButton" runat="server" Text="Add" OnClick="InsertButton_Click"/>
-                                <asp:Button ID="Cancelbutton" runat="server" Text="Cancel" OnClick="CancelButton_Click"/>
+                                <asp:Button ID="Cancelbutton"  runat="server" Text="Cancel" OnClientClick="return Cancel();"/>
                               </td>
                             </tr>
                           </table>
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </td>
-                <td style="height: 206px" valign="top">
-                    <asp:UpdatePanel ID="UserUpdatePanel" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false">
-                                <Columns>
-                                    <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
-                                    <asp:BoundField DataField="UserName"/>
-                                    <asp:BoundField DataField="Email"/>
-                                    <asp:BoundField DataField="FirstName"/>
-                                    <asp:BoundField DataField="LastName"/>
-                                </Columns>
-                                <PagerSettings PageButtonCount="5" />
-                            </asp:GridView>
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="InsertButton" EventName="Click" />
-                        </Triggers>
-                    </asp:UpdatePanel>
-                </td>
             </tr>
         </table>
+        <script type="text/javascript">
+            function Cancel() {
+                $('#<%=txtFirstName.ClientID%>').val('');
+                $('#<%=txtLastName.ClientID%>').val('');
+                $('#<%=txtUserName.ClientID%>').val('');
+                $('#<%=txtPassword.ClientID%>').val('');
+                $('#<%=txtEmail.ClientID%>').val('');
+                return false;
+            }
+    </script>
 </asp:Content>

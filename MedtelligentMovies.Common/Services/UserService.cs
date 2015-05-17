@@ -15,6 +15,7 @@ namespace MedtelligentMovies.Common.Services
         User ChangeLastName(int userId, string currentLastName);
         User GetUserById(int userId);
         User GetUserByUsername(string userName);
+        User GetUserByEmail(string email);
         IEnumerable<User> GetUsers(int startIndex, int numResults); 
         void DeleteUser(int userId);
     }
@@ -62,6 +63,11 @@ namespace MedtelligentMovies.Common.Services
         public User GetUserByUsername(string userName)
         {
             return _userRepository.GetUserByUsername(userName);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return _userRepository.GetUserByEmail(email);
         }
 
         public IEnumerable<User> GetUsers(int startIndex, int numResults)

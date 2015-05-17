@@ -14,7 +14,8 @@ namespace MedtelligentMovies.Web.Admin
         public IUserService UserService { get; set; }
 
         private IEnumerable<User> _users;
-        private bool _isUserNameValid = false;
+        private bool _isUserNameValid;
+        private bool _isEmailValid;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -28,6 +29,19 @@ namespace MedtelligentMovies.Web.Admin
             }
             gvUsers.DataSource = _users;
             gvUsers.DataBind();
+        }
+
+        protected void EmailUniqueValidation(object source, ServerValidateEventArgs arguments)
+        {
+
+            var email = arguments.Value;
+            var existingUser = UserService.GetUserByEmail(email);
+            if (existingUser != null)
+            {
+                arguments.IsValid = false;
+                return;
+            }
+            _isUserNameValid = true;
         }
 
         protected void UsernameUniqueValidation(object source, ServerValidateEventArgs arguments)
@@ -51,7 +65,8 @@ namespace MedtelligentMovies.Web.Admin
                String.IsNullOrEmpty(txtEmail.Text) ||
                String.IsNullOrEmpty(txtFirstName.Text) ||
                String.IsNullOrEmpty(txtLastName.Text) || 
-                !_isUserNameValid) { return; }
+                !_isUserNameValid ||
+                !_isEmailValid) { return; }
 
             var user = new User
             {
@@ -80,7 +95,7 @@ namespace MedtelligentMovies.Web.Admin
             txtUserName.Text = String.Empty;
             txtPassword.Text = String.Empty;
             txtEmail.Text = String.Empty;
-            txtEmail.Text = String.Empty;
+            txtFirstName.Text = String.Empty;
             txtLastName.Text = String.Empty;
         }
     }
