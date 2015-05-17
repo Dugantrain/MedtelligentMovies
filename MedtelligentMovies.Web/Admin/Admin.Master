@@ -38,17 +38,92 @@
 
         </Scripts>
     </asp:ScriptManager>
-    <div class="content-wrapper">
+        <header>
+        <div class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">
                     <a runat="server" href="~/">your logo here</a>
                 </p>
             </div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
-        </asp:ContentPlaceHolder>
+            <div class="float-right">
+                <section id="login">
+                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul>
+                                <li><a id="loginLink" runat="server" href="~/Account/Login">Log in</a></li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <p>
+                                Hello, <a runat="server" class="username" href="~/Account/Manage" title="Manage your account">
+                                    <asp:LoginName runat="server" CssClass="username" /></a>!
+                                <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
+                            </p>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </section>
+                <nav>
+                    <ul id="menu">
+                        <li><a runat="server" href="/Public/Landing.aspx">Home</a></li>
+                        <li><a runat="server" href="/Admin/ManageUsers.aspx">Users</a></li>
+                        <li><a runat="server" href="/Admin/ManageGenres.aspx">Genres</a></li>
+                        <li><a runat="server" href="/Admin/ManageUsers.aspx">Movies</a></li>
+                    </ul>
+                </nav>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#txtMovieSearch').autocomplete({
+                            source: function (request, response) {
+                                var autocompleteUrl = '/api/MovieSearch?searchText=' + request.term;
+                                $.ajax({
+                                    url: autocompleteUrl,
+                                    type: 'GET',
+                                    cache: false,
+                                    dataType: 'json',
+                                    success: function (json) {
+                                        if (!json.length) {
+                                            var result = [
+                                               {
+                                                   label: 'No movies found.',
+                                                   value: response.term
+                                               }
+                                            ];
+                                            response(result);
+                                        }
+                                        else {
+                                            response($.map(json, function (data, id) {
+                                                return {
+                                                    label: data.Title,
+                                                    value: data.Id
+                                                };
+                                            }));
+                                        }
+                                    },
+                                    error: function (xmlHttpRequest, textStatus, errorThrown) {
+                                        console.log('An error occured:', textStatus, errorThrown);
+                                    }
+                                });
+                            },
+                            minLength: 1,
+                            select: function (event, ui) {
+                                lblMessage.innerText = "Your Selected Name :";
+                                lblSelectedVal.innerText = ui.item.label;
+                                $('#txtName').val(ui.item.label);
+                                return false;
+                            }
+                        });
+                    });
+            </script>  
+            </div>
+        </div>
+    </header>
+        <div id="body">
+        <asp:ContentPlaceHolder runat="server" ID="FeaturedContent" />
+        <section class="content-wrapper main-content clear-fix">
+            <asp:ContentPlaceHolder runat="server" ID="MainContent" />
+        </section>
     </div>
-        <footer>
+    <footer>
         <div class="content-wrapper">
             <div class="float-left">
                 <p>&copy; <%: DateTime.Now.Year %> - Mike Dugan</p>

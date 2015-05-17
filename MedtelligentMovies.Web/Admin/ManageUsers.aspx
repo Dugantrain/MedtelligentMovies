@@ -1,7 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true" CodeBehind="ManageUsers.aspx.cs" Inherits="MedtelligentMovies.Web.Admin.ManageUsers" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="headContent" runat="server">
+<asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>User Management</h1>
+            </hgroup>
+        </div>
+    </section>
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="body" ContentPlaceHolderID="MainContent" runat="server">
     <style type="text/css">
     .panel{
         display:none;

@@ -41,7 +41,7 @@ namespace MedtelligentMovies.Web.Admin
                 arguments.IsValid = false;
                 return;
             }
-            _isUserNameValid = true;
+            _isEmailValid = true;
         }
 
         protected void UsernameUniqueValidation(object source, ServerValidateEventArgs arguments)
