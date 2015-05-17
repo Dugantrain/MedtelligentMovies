@@ -101,6 +101,21 @@ namespace MedtelligentMovies.Web.Admin
             txtLastName.Text = String.Empty;
         }
 
+        protected void gvUsers_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var deleteButton = e.Row.FindControl("lnkDelete") as LinkButton;
+                var user = (User) e.Row.DataItem;
+                if (user.Id == 1)
+                {
+                    deleteButton.Visible = false;
+                }
+                //here apply your condition
+
+            }
+        }
+
         protected void CancelButton_Click(object sender, EventArgs e)
         {
             txtUserName.Text = String.Empty;

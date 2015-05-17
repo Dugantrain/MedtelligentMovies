@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true" CodeBehind="ManageUsers.aspx.cs" Inherits="MedtelligentMovies.Web.Admin.ManageUsers" %>
+<%@ Import Namespace="System.Diagnostics.Eventing.Reader" %>
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <section class="featured">
         <div class="content-wrapper">
@@ -19,7 +20,7 @@
                 <td style="height: 206px" valign="top">
                     <asp:UpdatePanel ID="UserUpdatePanel" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <asp:GridView ID="gvUsers" runat="server" AutoGenerateColumns="false">
+                            <asp:GridView ID="gvUsers" OnRowDataBound="gvUsers_RowDataBound" runat="server" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
                                     <asp:BoundField DataField="UserName"/>
@@ -28,7 +29,7 @@
                                     <asp:BoundField DataField="LastName"/>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:LinkButton ID="lnkdelete" CommandArgument = '<%# Eval("Id")%>' runat="server" OnClick="DeleteUser" CommandName="Delete" >Delete</asp:LinkButton>
+                                            <asp:LinkButton runat="server" ID="lnkdelete" CommandArgument = '<%# Eval("Id")%>' OnClick="DeleteUser" CommandName="Delete" >Delete</asp:LinkButton>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
