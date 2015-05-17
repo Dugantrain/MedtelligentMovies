@@ -39,11 +39,23 @@
     </asp:ScriptManager>
     <header>
         <style type="text/css">
-            .ui-menu .ui-menu-item a{
-    color: #96f226;
-    border-radius: 0px;
-    border: 1px solid #454545;
-            </style>
+             .ui-menu {
+     overflow: hidden;
+                 list-style-type: none;
+     border: 1px solid #e2e2e2;
+                 width: 200px;
+     background:white
+ }
+             .ui-menu .ui-menu-item a {
+                 margin-top: 35px !important;
+                 color: #999;
+                 font-weight:bold;
+                 font-size: 150%;
+                 list-style-type:none;
+                 border: none;
+                 text-decoration: none;
+             }
+        </style>
         
 }
         <div class="content-wrapper">
