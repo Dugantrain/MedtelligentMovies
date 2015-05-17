@@ -26,8 +26,12 @@
                                     <asp:BoundField DataField="Email"/>
                                     <asp:BoundField DataField="FirstName"/>
                                     <asp:BoundField DataField="LastName"/>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="lnkdelete" CommandArgument = '<%# Eval("Id")%>' runat="server" OnClick="DeleteUser" CommandName="Delete" >Delete</asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                 </Columns>
-                                <PagerSettings PageButtonCount="5" />
                             </asp:GridView>
                         </ContentTemplate>
                         <Triggers>
@@ -46,7 +50,7 @@
                                              Text="First Name" /></td>
                               <td><asp:TextBox runat="server" MaxLength="50" ID="txtFirstName" /></td>
                                 <td>
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtFirstName" CssClass="field-validation-error" ErrorMessage="First Name is required." />
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtFirstName" ValidationGroup="saveValidation" CssClass="field-validation-error" ErrorMessage="First Name is required." />
                               </td>
                             </tr>
                             <tr>
@@ -54,7 +58,7 @@
                                              Text="Last Name" /></td>
                               <td><asp:TextBox MaxLength="50" runat="server" ID="txtLastName" /></td>
                                 <td>
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLastName" CssClass="field-validation-error" ErrorMessage="Last Name is required." />
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLastName" ValidationGroup="saveValidation" CssClass="field-validation-error" ErrorMessage="Last Name is required." />
                               </td>
                             </tr>
                             <tr>
@@ -63,8 +67,8 @@
                               </td>
                               <td><asp:TextBox MaxLength="20" runat="server" ID="txtUserName" /></td>
                               <td>
-                                <asp:RequiredFieldValidator Display="Dynamic" runat="server" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name is required." />
-                                <asp:CustomValidator runat="server" Display="Dynamic" SetFocusOnError="True" OnServerValidate="UsernameUniqueValidation" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name already exists." />
+                                <asp:RequiredFieldValidator Display="Dynamic" runat="server" ValidationGroup="saveValidation" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name is required." />
+                                <asp:CustomValidator runat="server" Display="Dynamic" ValidationGroup="saveValidation" SetFocusOnError="True" OnServerValidate="UsernameUniqueValidation" ControlToValidate="txtUserName" CssClass="field-validation-error" ErrorMessage="User Name already exists." />
                               </td>
                             </tr>
                             <tr>
@@ -72,7 +76,7 @@
                                              Text="Password" /></td>
                               <td><asp:TextBox runat="server" ID="txtPassword" TextMode="Password" /></td>
                                 <td>
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" CssClass="field-validation-error" ErrorMessage="Password is required." />
+                                  <asp:RequiredFieldValidator runat="server" ValidationGroup="saveValidation" ControlToValidate="txtPassword" CssClass="field-validation-error" ErrorMessage="Password is required." />
                               </td>
                             </tr>
                             <tr>
@@ -80,15 +84,15 @@
                                              Text="Email" /></td>
                               <td><asp:TextBox runat="server" ID="txtEmail" /></td>
                                 <td>
-                                  <asp:RequiredFieldValidator runat="server" Display="Dynamic" ControlToValidate="txtEmail" CssClass="field-validation-error" ErrorMessage="Email is required." />
-                                  <asp:RegularExpressionValidator ID="regexEmailValid" Display="Dynamic" runat="server" CssClass="field-validation-error" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ErrorMessage="Invalid Email Format."></asp:RegularExpressionValidator>
-                                  <asp:CustomValidator runat="server" Display="Dynamic" SetFocusOnError="True" OnServerValidate="EmailUniqueValidation" ControlToValidate="txtEmail" CssClass="field-validation-error" ErrorMessage="Email already exists." />
+                                  <asp:RequiredFieldValidator runat="server" Display="Dynamic" ValidationGroup="saveValidation" ControlToValidate="txtEmail" CssClass="field-validation-error" ErrorMessage="Email is required." />
+                                  <asp:RegularExpressionValidator ID="regexEmailValid" ValidationGroup="saveValidation" Display="Dynamic" runat="server" CssClass="field-validation-error" ValidationExpression="\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ErrorMessage="Invalid Email Format."></asp:RegularExpressionValidator>
+                                  <asp:CustomValidator runat="server" Display="Dynamic" ValidationGroup="saveValidation" SetFocusOnError="True" OnServerValidate="EmailUniqueValidation" ControlToValidate="txtEmail" CssClass="field-validation-error" ErrorMessage="Email already exists." />
                                 </td>
                             </tr>
                             <tr>
                               <td></td>
                               <td>
-                                <asp:Button ID="InsertButton" runat="server" Text="Add" OnClick="InsertButton_Click"/>
+                                <asp:Button ID="InsertButton" runat="server" ValidationGroup="saveValidation"  Text="Save" OnClick="InsertButton_Click"/>
                                 <asp:Button ID="Cancelbutton"  runat="server" Text="Cancel" OnClientClick="return Cancel();"/>
                               </td>
                             </tr>

@@ -57,6 +57,17 @@ namespace MedtelligentMovies.Web.Admin
             _isUserNameValid = true;
         }
 
+        protected void DeleteUser(object sender, EventArgs e)
+        {
+            var lnkRemove = (LinkButton)sender;
+            var userId = Convert.ToInt32(lnkRemove.CommandArgument);
+            UserService.DeleteUser(userId);
+            _users = UserService.GetUsers(0, Int32.MaxValue);
+            ViewState["Users"] = _users;
+            gvUsers.DataSource = _users;
+            gvUsers.DataBind();
+        }
+
         protected void InsertButton_Click(object sender, EventArgs e)
         {
             if (
