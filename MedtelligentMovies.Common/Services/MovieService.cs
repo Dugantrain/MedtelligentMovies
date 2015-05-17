@@ -19,6 +19,7 @@ namespace MedtelligentMovies.Common.Services
         Movie ChangeReleaseDate(int movieId, DateTime currentReleaseDate);
         void DeleteMovie(int movieId);
         IEnumerable<Movie> GetMoviesBySearchText(string searchText);
+        IEnumerable<Movie> GetMovies(int startIndex, int numResults);
     }
     public class MovieService : IMovieService
     {
@@ -92,6 +93,11 @@ namespace MedtelligentMovies.Common.Services
         public IEnumerable<Movie> GetMoviesBySearchText(string searchText)
         {
             return _movieRepository.GetMoviesBySearchText(searchText);
+        }
+
+        public IEnumerable<Movie> GetMovies(int startIndex, int numResults)
+        {
+            return _movieRepository.GetMovies(startIndex, numResults);
         }
     }
 }

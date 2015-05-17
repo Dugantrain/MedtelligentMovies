@@ -8,5 +8,12 @@
         </div>
     </section>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <asp:GridView CssClass="" ID="gvMovies" AutoGenerateColumns="false" runat="server">
+        <Columns>
+            <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
+            <asp:BoundField DataField="Title"/>
+            <asp:BoundField DataField="Description"/>
+        </Columns>
+    </asp:GridView>
 </asp:Content>

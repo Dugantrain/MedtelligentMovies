@@ -16,6 +16,7 @@ namespace MedtelligentMovies.Common.Repositories
         Movie UpdateMovie(Movie movie);
         void DeleteMovie(int movieId);
         IEnumerable<Movie> GetMoviesBySearchText(string searchText);
+        IEnumerable<Movie> GetMovies(int startIndex, int numResults);
     }
     public class MovieRepository : IMovieRepository
     {
@@ -88,6 +89,11 @@ namespace MedtelligentMovies.Common.Repositories
                 }
             }
             return _medtelligentMovieContext.Movies.Where(m => filteredMovieIds.Any(f => f == m.Id)).OrderBy(m => m.Title);
+        }
+
+        public IEnumerable<Movie> GetMovies(int startIndex, int numResults)
+        {
+            return _medtelligentMovieContext.Movies.OrderBy(m=>m.Title).Skip(startIndex).Take(numResults);
         }
     }
 }
