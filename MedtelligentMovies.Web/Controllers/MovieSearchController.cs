@@ -22,9 +22,15 @@ namespace MedtelligentMovies.Web.Controllers
             _movieService = movieService;
         }
         // GET api/<controller>
-        public IEnumerable<Movie> Get(string searchText)
+        public IEnumerable<MenuMovie> Get(string searchText)
         {
-            return _movieService.GetMoviesBySearchText(searchText);
+            return _movieService.GetMoviesBySearchText(searchText).Select(m=>new MenuMovie{Id = m.Id,Title = m.Title});
         }
+    }
+
+    public class MenuMovie
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
     }
 }
