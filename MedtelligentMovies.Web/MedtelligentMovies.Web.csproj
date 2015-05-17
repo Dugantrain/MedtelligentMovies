@@ -175,6 +175,7 @@
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterExternalLogin.aspx" />
     <Content Include="Admin\ManageGenres.aspx" />
+    <Content Include="Admin\ManageMovies.aspx" />
     <Content Include="Admin\ManageUsers.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\Site.css" />
@@ -309,6 +310,13 @@
     </Compile>
     <Compile Include="Admin\ManageGenres.aspx.designer.cs">
       <DependentUpon>ManageGenres.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\ManageMovies.aspx.cs">
+      <DependentUpon>ManageMovies.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ManageMovies.aspx.designer.cs">
+      <DependentUpon>ManageMovies.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\ManageUsers.aspx.cs">
       <DependentUpon>ManageUsers.aspx</DependentUpon>
