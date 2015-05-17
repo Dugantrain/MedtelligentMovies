@@ -10,11 +10,6 @@
     </section>
 </asp:Content>
 <asp:Content ID="body" ContentPlaceHolderID="MainContent" runat="server">
-    <style type="text/css">
-    .panel{
-        display:none;
-    }
-    </style>
         <table>
            <tr>
                 <td style="height: 206px" valign="top">

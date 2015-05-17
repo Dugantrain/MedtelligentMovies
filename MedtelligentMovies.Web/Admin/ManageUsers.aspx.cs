@@ -159,8 +159,6 @@ namespace MedtelligentMovies.Web.Admin
                 {
                     deleteButton.Visible = false;
                 }
-                //here apply your condition
-
             }
         }
 
