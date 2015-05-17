@@ -36,7 +36,8 @@ namespace MedtelligentMovies.Common.Repositories
 
         public User UpdateUser(User user)
         {
-            _medtelligentMovieContext.Users.Attach(user);
+            var existingUser = _medtelligentMovieContext.Users.Find(user.Id);
+            existingUser = user;
             _medtelligentMovieContext.SaveChanges();
             return user;
         }

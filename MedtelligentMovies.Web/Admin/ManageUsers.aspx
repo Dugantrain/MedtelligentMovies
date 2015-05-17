@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" AutoEventWireup="true" CodeBehind="ManageUsers.aspx.cs" Inherits="MedtelligentMovies.Web.Admin.ManageUsers" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/Admin.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="ManageUsers.aspx.cs" Inherits="MedtelligentMovies.Web.Admin.ManageUsers" %>
 <%@ Import Namespace="System.Diagnostics.Eventing.Reader" %>
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <section class="featured">
@@ -29,14 +29,19 @@
                                     <asp:BoundField DataField="LastName"/>
                                     <asp:TemplateField>
                                         <ItemTemplate>
-                                            <asp:LinkButton runat="server" ID="lnkdelete" CommandArgument = '<%# Eval("Id")%>' OnClick="DeleteUser" CommandName="Delete" >Delete</asp:LinkButton>
+                                            <asp:Button runat="server" ID="btnUpdate" CommandArgument='<%# Eval("Id") %>' OnClick="PopulateFieldsForUpdate" Text="Update" CommandName="Update"/>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteUser" Text="Delete" CommandName="Delete"/>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
                             </asp:GridView>
                         </ContentTemplate>
                         <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="InsertButton" EventName="Click" />
+                            <asp:AsyncPostBackTrigger ControlID="SaveButton" EventName="Click" />
                         </Triggers>
                     </asp:UpdatePanel>
                 </td>
@@ -46,6 +51,11 @@
                     <asp:UpdatePanel ID="InsertUserUpdatePanel"  runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                           <table>
+                              <tr style="display: none">
+                                  <td>
+                                      <asp:HiddenField ID="hdnId" runat="server"/>
+                                  </td>
+                              </tr>
                              <tr>
                               <td><asp:Label ID="lblFirstName" runat="server" AssociatedControlID="txtFirstName" 
                                              Text="First Name" /></td>
@@ -93,8 +103,8 @@
                             <tr>
                               <td></td>
                               <td>
-                                <asp:Button ID="InsertButton" runat="server" ValidationGroup="saveValidation"  Text="Save" OnClick="InsertButton_Click"/>
-                                <asp:Button ID="Cancelbutton"  runat="server" Text="Cancel" OnClientClick="return Cancel();"/>
+                                <asp:Button ID="SaveButton" runat="server" ValidationGroup="saveValidation"  Text="Save" OnClick="SaveButton_Click"/>
+                                <asp:Button ID="Cancelbutton"  runat="server" Text="Cancel" OnClick="CancelButton_Click"/>
                               </td>
                             </tr>
                           </table>
@@ -103,14 +113,4 @@
                 </td>
             </tr>
         </table>
-        <script type="text/javascript">
-            function Cancel() {
-                $('#<%=txtFirstName.ClientID%>').val('');
-                $('#<%=txtLastName.ClientID%>').val('');
-                $('#<%=txtUserName.ClientID%>').val('');
-                $('#<%=txtPassword.ClientID%>').val('');
-                $('#<%=txtEmail.ClientID%>').val('');
-                return false;
-            }
-    </script>
 </asp:Content>

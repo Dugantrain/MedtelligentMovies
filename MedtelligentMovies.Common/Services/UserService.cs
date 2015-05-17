@@ -13,6 +13,9 @@ namespace MedtelligentMovies.Common.Services
         User Create(User user);
         User ChangeFirstName(int userId, string currentFirstName);
         User ChangeLastName(int userId, string currentLastName);
+        User ChangePassword(int userId, string currentEncryptedPassword);
+        User ChangeEmail(int userId, string currentEmail);
+        User ChangeUserName(int userId, string currentUserName);
         User GetUserById(int userId);
         User GetUserByUsername(string userName);
         User GetUserByEmail(string email);
@@ -50,6 +53,39 @@ namespace MedtelligentMovies.Common.Services
             if (user != null)
             {
                 user.LastName = currentLastName;
+                _userRepository.UpdateUser(user);
+            }
+            return user;
+        }
+
+        public User ChangePassword(int userId, string currentEncryptedPassword)
+        {
+            var user = _userRepository.GetUserById(userId);
+            if (user != null)
+            {
+                user.EncryptedPassword = currentEncryptedPassword;
+                _userRepository.UpdateUser(user);
+            }
+            return user;
+        }
+
+        public User ChangeEmail(int userId, string currentEmail)
+        {
+            var user = _userRepository.GetUserById(userId);
+            if (user != null)
+            {
+                user.Email = currentEmail;
+                _userRepository.UpdateUser(user);
+            }
+            return user;
+        }
+
+        public User ChangeUserName(int userId, string currentUserName)
+        {
+            var user = _userRepository.GetUserById(userId);
+            if (user != null)
+            {
+                user.UserName = currentUserName;
                 _userRepository.UpdateUser(user);
             }
             return user;

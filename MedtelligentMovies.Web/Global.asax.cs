@@ -27,6 +27,8 @@ namespace MedtelligentMovies.Web
 
         void Application_Error(object sender, EventArgs e)
         {
+            System.Web.HttpContext context = HttpContext.Current;
+            System.Exception x = Context.Server.GetLastError();
             // Code that runs when an unhandled error occurs
 
         }

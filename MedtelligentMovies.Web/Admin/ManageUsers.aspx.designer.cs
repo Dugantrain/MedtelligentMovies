@@ -40,6 +40,15 @@ namespace MedtelligentMovies.Web.Admin {
         protected global::System.Web.UI.UpdatePanel InsertUserUpdatePanel;
         
         /// <summary>
+        /// hdnId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnId;
+        
+        /// <summary>
         /// lblFirstName control.
         /// </summary>
         /// <remarks>
@@ -139,13 +148,13 @@ namespace MedtelligentMovies.Web.Admin {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator regexEmailValid;
         
         /// <summary>
-        /// InsertButton control.
+        /// SaveButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button InsertButton;
+        protected global::System.Web.UI.WebControls.Button SaveButton;
         
         /// <summary>
         /// Cancelbutton control.

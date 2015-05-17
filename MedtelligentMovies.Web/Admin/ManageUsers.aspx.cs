@@ -12,6 +12,8 @@ namespace MedtelligentMovies.Web.Admin
     {
         [Dependency]
         public IUserService UserService { get; set; }
+        [Dependency]
+        public IUserContextService UserContextService { get; set; }
 
         private IEnumerable<User> _users;
         private bool _isUserNameValid;
@@ -33,33 +35,53 @@ namespace MedtelligentMovies.Web.Admin
 
         protected void EmailUniqueValidation(object source, ServerValidateEventArgs arguments)
         {
-
-            var email = arguments.Value;
-            var existingUser = UserService.GetUserByEmail(email);
-            if (existingUser != null)
+            //When creating new user.
+            if (String.IsNullOrEmpty(hdnId.Value))
             {
-                arguments.IsValid = false;
-                return;
+                var email = arguments.Value;
+                var existingUser = UserService.GetUserByEmail(email);
+                if (existingUser != null)
+                {
+                    arguments.IsValid = false;
+                    return;
+                }
             }
             _isEmailValid = true;
         }
 
         protected void UsernameUniqueValidation(object source, ServerValidateEventArgs arguments)
         {
-
-            var userName = arguments.Value;
-            var existingUser = UserService.GetUserByUsername(userName);
-            if (existingUser != null)
+            //When creating new user.
+            if (String.IsNullOrEmpty(hdnId.Value))
             {
-                arguments.IsValid = false;
-                return;
+                var userName = arguments.Value;
+                var existingUser = UserService.GetUserByUsername(userName);
+                if (existingUser != null)
+                {
+                    arguments.IsValid = false;
+                    return;
+                }
             }
             _isUserNameValid = true;
         }
 
+        protected void PopulateFieldsForUpdate(object sender, EventArgs e)
+        {
+            var lnkUpdate = (Button)sender;
+            var userId = Convert.ToInt32(lnkUpdate.CommandArgument);
+            var user = UserService.GetUserById(userId);
+            hdnId.Value = user.Id.ToString();
+            txtFirstName.Text = user.FirstName;
+            txtLastName.Text = user.LastName;
+            txtEmail.Text = user.Email;
+            txtPassword.Text = user.EncryptedPassword.Decrypt();
+            txtUserName.Text = user.UserName;
+            InsertUserUpdatePanel.Update();
+        }
+
         protected void DeleteUser(object sender, EventArgs e)
         {
-            var lnkRemove = (LinkButton)sender;
+            var lnkRemove = (Button)sender;
             var userId = Convert.ToInt32(lnkRemove.CommandArgument);
             UserService.DeleteUser(userId);
             _users = UserService.GetUsers(0, Int32.MaxValue);
@@ -68,7 +90,7 @@ namespace MedtelligentMovies.Web.Admin
             gvUsers.DataBind();
         }
 
-        protected void InsertButton_Click(object sender, EventArgs e)
+        protected void SaveButton_Click(object sender, EventArgs e)
         {
             if (
                String.IsNullOrEmpty(txtUserName.Text) ||
@@ -79,16 +101,32 @@ namespace MedtelligentMovies.Web.Admin
                 !_isUserNameValid ||
                 !_isEmailValid) { return; }
 
-            var user = new User
+            if (!String.IsNullOrEmpty(hdnId.Value))
             {
-                IsAdministrator = true,
-                FirstName = txtFirstName.Text,
-                LastName = txtLastName.Text,
-                UserName = txtUserName.Text,
-                EncryptedPassword = txtPassword.Text.Encrypt(),
-                Email = txtEmail.Text
-            };
-            UserService.Create(user);
+                //Update
+                var user = UserService.GetUserById(Convert.ToInt32(hdnId.Value));
+                if (user.FirstName != txtFirstName.Text) UserService.ChangeFirstName(user.Id, txtFirstName.Text);
+                if (user.LastName != txtLastName.Text) UserService.ChangeLastName(user.Id, txtLastName.Text);
+                if (user.UserName != txtUserName.Text) UserService.ChangeUserName(user.Id, txtUserName.Text);
+                if (user.Email != txtEmail.Text) UserService.ChangeEmail(user.Id, txtEmail.Text);
+                if (user.EncryptedPassword.Decrypt() != txtPassword.Text) UserService.ChangePassword(user.Id, txtPassword.Text);
+            }
+            else
+            {
+                //Create
+                var user = new User
+                {
+                    IsAdministrator = true,
+                    FirstName = txtFirstName.Text,
+                    LastName = txtLastName.Text,
+                    UserName = txtUserName.Text,
+                    EncryptedPassword = txtPassword.Text.Encrypt(),
+                    Email = txtEmail.Text
+                };
+                UserService.Create(user);
+            }
+
+            
             _users = UserService.GetUsers(0,Int32.MaxValue);
             ViewState["Users"] = _users;
             gvUsers.DataSource = _users;
@@ -103,11 +141,21 @@ namespace MedtelligentMovies.Web.Admin
 
         protected void gvUsers_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            var contextUserName = UserContextService.GetUserName();
+            var contextUser = UserService.GetUserByUsername(contextUserName);
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                var deleteButton = e.Row.FindControl("lnkDelete") as LinkButton;
+                var deleteButton = (Button) e.Row.FindControl("btnDelete");
+                var updateButton = (Button) e.Row.FindControl("btnUpdate");
                 var user = (User) e.Row.DataItem;
+                //Can't delete or update the original Admin User.
                 if (user.Id == 1)
+                {
+                    updateButton.Visible = false;
+                    deleteButton.Visible = false;
+                }
+                //Can't delete yourself.
+                if (contextUser.Id == user.Id)
                 {
                     deleteButton.Visible = false;
                 }
@@ -118,11 +166,13 @@ namespace MedtelligentMovies.Web.Admin
 
         protected void CancelButton_Click(object sender, EventArgs e)
         {
+            hdnId.Value = String.Empty;
             txtUserName.Text = String.Empty;
             txtPassword.Text = String.Empty;
             txtEmail.Text = String.Empty;
             txtFirstName.Text = String.Empty;
             txtLastName.Text = String.Empty;
+            InsertUserUpdatePanel.Update();
         }
     }
 }
