@@ -125,5 +125,15 @@ namespace MedtelligentMovies.Web.Admin
 
             InsertUpdateMoviePanel.Update();
         }
+
+        protected void gvMovies_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var movie = (Movie) e.Row.DataItem;
+                var genre = _genres.Single(g => g.Id == movie.GenreId);
+                e.Row.Cells[3].Text = genre.Title;
+            }
+        }
     }
 }

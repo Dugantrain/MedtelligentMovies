@@ -14,12 +14,13 @@
                 <td style="height: 206px" valign="top">
                     <asp:UpdatePanel ID="MovieUpdatePanel" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <asp:GridView ID="gvMovies" GridLines="None" RowStyle-CssClass="row" AlternatingRowStyle-CssClass="alt-row"  CellPadding="4" CssClass="Grid"  runat="server" AutoGenerateColumns="false">
+                            <asp:GridView ID="gvMovies" GridLines="None" RowStyle-CssClass="row" OnRowDataBound="gvMovies_RowDataBound" AlternatingRowStyle-CssClass="alt-row"
+                                CellPadding="4" CssClass="Grid"  runat="server" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
-                                    <asp:BoundField DataField="Title"/>
-                                    <asp:BoundField DataField="Description"/>
-                                    <asp:BoundField DataField="Genre.Title"/>
+                                    <asp:BoundField DataField="Title" HeaderText="Title"/>
+                                    <asp:BoundField DataField="Description" HeaderText="Description"/>
+                                    <asp:BoundField DataField="Genre.Title" HeaderText="Genre"/>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:Button runat="server" ID="btnUpdate" CommandArgument='<%# Eval("Id") %>' OnClick="PopulateFieldsForUpdate" Text="Update" CommandName="Update"/>
