@@ -29,7 +29,6 @@
                                     <asp:BoundField DataField="Id" Visible="false" HeaderText="Id" HeaderStyle-HorizontalAlign="Left" />
                                     <asp:BoundField DataField="Title" HeaderText="Title" HeaderStyle-HorizontalAlign="Left" />
                                     <asp:BoundField DataField="Description" HeaderText="Description" HeaderStyle-HorizontalAlign="Left" />
-                                    <asp:BoundField DataField="ReleaseDate" HeaderText="Release Date" HeaderStyle-HorizontalAlign="Left" />
                                 </Columns>
                                 </asp:GridView>
 <%--                            </div>--%>

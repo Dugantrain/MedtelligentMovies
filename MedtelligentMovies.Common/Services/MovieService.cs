@@ -16,10 +16,10 @@ namespace MedtelligentMovies.Common.Services
         Movie Create(Movie movie);
         Movie ChangeTitle(int movieId, string currentTitle);
         Movie ChangeDescription(int movieId, string currentDescription);
-        Movie ChangeReleaseDate(int movieId, DateTime currentReleaseDate);
         void DeleteMovie(int movieId);
         IEnumerable<Movie> GetMoviesBySearchText(string searchText);
-        IEnumerable<Movie> GetMovies(int startIndex, int numResults);
+        IList<Movie> GetMovies(int startIndex, int numResults);
+        IList<Movie> GetMoviesWithGenre(int startIndex, int numResults);
     }
     public class MovieService : IMovieService
     {
@@ -47,11 +47,12 @@ namespace MedtelligentMovies.Common.Services
 
         public Movie Create(Movie movie)
         {
-            var genreId = movie.Genre.Id;
+            var genreId = movie.GenreId;
+            var genre = _genreRepository.GetGenreById(genreId);
             movie = _movieRepository.AddMovie(movie);
             var numMovies = GetMoviesByGenreId(genreId).Count();
-            movie.Genre.NumMovies = numMovies;
-            _genreRepository.UpdateGenre(movie.Genre);
+            genre.NumMovies = numMovies;
+            _genreRepository.UpdateGenre(genre);
             return movie;
         }
 
@@ -71,22 +72,15 @@ namespace MedtelligentMovies.Common.Services
             return movie;
         }
 
-        public Movie ChangeReleaseDate(int movieId, DateTime currentReleaseDate)
-        {
-            var movie = _movieRepository.GetMovieById(movieId);
-            movie.ReleaseDate = currentReleaseDate;
-            _movieRepository.UpdateMovie(movie);
-            return movie;
-        }
-
         public void DeleteMovie(int movieId)
         {
             var movie = GetMovieById(movieId);
             _movieRepository.DeleteMovie(movieId);
             if (movie != null)
             {
-                movie.Genre.NumMovies = GetMoviesByGenreId(movie.Genre.Id).Count();
-                _genreRepository.UpdateGenre(movie.Genre);
+                var genre = _genreRepository.GetGenreById(movie.GenreId);
+                genre.NumMovies = GetMoviesByGenreId(genre.Id).Count();
+                _genreRepository.UpdateGenre(genre);
             }
         }
 
@@ -95,9 +89,14 @@ namespace MedtelligentMovies.Common.Services
             return _movieRepository.GetMoviesBySearchText(searchText);
         }
 
-        public IEnumerable<Movie> GetMovies(int startIndex, int numResults)
+        public IList<Movie> GetMovies(int startIndex, int numResults)
         {
-            return _movieRepository.GetMovies(startIndex, numResults);
+            return _movieRepository.GetMovies(startIndex, numResults).ToList();
+        }
+
+        public IList<Movie> GetMoviesWithGenre(int startIndex, int numResults)
+        {
+            return _movieRepository.GetMoviesWithGenre(startIndex, numResults).ToList();
         }
     }
 }
