@@ -1,0 +1,69 @@
+﻿body 
+{
+    font-family: Verdana;
+}
+
+/*** Grid styles ***/
+.datatable
+{
+    color: #444;
+    font-size: smaller;
+    border: 1px solid #222;
+}
+
+/*** Header styles ***/
+.datatable TH
+{
+    background-color: #ffaaa6;
+    height: 30px;
+}
+
+.datatable TH A
+{
+    text-decoration: none;
+    color: Black;
+    padding-right: 20px;
+}
+
+/*** Row styles ***/
+.row
+{
+    background-color: #f0fdf2;
+    font-size: 200%;
+}
+
+.alt-row
+{
+    background-color: #cffdd4;
+}
+
+/*** Pager row styles ***/
+TR.pager-row
+{
+    background-color: #ffd2d0;
+}
+
+TR.pager-row TD
+{
+    text-align: center;
+}
+
+TR.pager-row TABLE
+{
+	height:35px;
+	margin:0 auto 0 auto;
+}
+
+/*** Sorting styles ***/
+.sortasc-row
+{
+    background-color: #ffe7d0;
+}
+
+.sortdesc-row
+{
+    background-color: #fed1a5;
+}
+
+.sortasc-header A { background:url(../img/asc.gif) right center no-repeat; }
+.sortdesc-header A { background:url(../img/desc.gif) right center no-repeat; }

@@ -4,7 +4,7 @@
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>User Management</h1>
+                <h1>Administrator Management</h1>
             </hgroup>
         </div>
     </section>

@@ -10,7 +10,7 @@
     </section>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <asp:GridView CssClass="" ID="gvGenres" AutoGenerateColumns="false" OnRowDataBound="gvGenres_RowDataBound" runat="server">
+    <asp:GridView ID="gvGenres" AutoGenerateColumns="false" OnRowDataBound="gvGenres_RowDataBound" runat="server">
         <Columns>
             <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
             <asp:hyperlinkfield datatextfield="Title" datanavigateurlfields="Id" datanavigateurlformatstring="genre.aspx?g={0}"  />

@@ -14,7 +14,7 @@
                 <td style="height: 206px" valign="top">
                     <asp:UpdatePanel ID="MovieUpdatePanel" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <asp:GridView ID="gvMovies" runat="server" AutoGenerateColumns="false">
+                            <asp:GridView ID="gvMovies" GridLines="None" RowStyle-CssClass="row" AlternatingRowStyle-CssClass="alt-row"  CellPadding="4" CssClass="Grid"  runat="server" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
                                     <asp:BoundField DataField="Title"/>
@@ -60,7 +60,7 @@
                             <tr>
                               <td><asp:Label ID="lblDescription" runat="server" AssociatedControlID="txtDescription" 
                                              Text="Description" /></td>
-                              <td><asp:TextBox MaxLength="50" runat="server" ID="txtDescription" /></td>
+                              <td><asp:TextBox MaxLength="200" TextMode="MultiLine" runat="server" ID="txtDescription" /></td>
                                 <td>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDescription" ValidationGroup="saveValidation" CssClass="field-validation-error" ErrorMessage="Description is required." />
                               </td>
@@ -70,6 +70,7 @@
                                              Text="Genre" /></td>
                               <td><asp:DropDownList runat="server" ID="ddlGenre" /></td>
                                 <td>
+                                    <asp:CustomValidator runat="server" Display="Dynamic" ValidationGroup="saveValidation" SetFocusOnError="True" OnServerValidate="DropDownGenreValidation" ControlToValidate="ddlGenre" CssClass="field-validation-error" ErrorMessage="Please select a Genre." />
                               </td>
                             </tr>
                             <tr>

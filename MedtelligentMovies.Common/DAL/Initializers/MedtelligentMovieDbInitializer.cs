@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using MedtelligentMovies.Common.DAL.DbContexts;
+using MedtelligentMovies.Common.Extensions;
 using MedtelligentMovies.Common.Models;
 using MedtelligentMovies.Common.Services;
 
@@ -32,7 +33,7 @@ namespace MedtelligentMovies.Common.DAL.Initializers
                         FirstName = "Chester",
                         LastName = "Administrator",
                         UserName = "MedMoviesAdmin",
-                        EncryptedPassword = "FBqHWZ3qHqsAx4UYbUUE0RWn6s4JKal1GbYT0ad+nr4=",
+                        EncryptedPassword = "M3dAdm1n".Encrypt(),
                         Email = "Admin@medtelligentmovies.com",
                         IsAdministrator = true
                         };
@@ -41,9 +42,9 @@ namespace MedtelligentMovies.Common.DAL.Initializers
 
             //Genres
             var comedyGenre = new Genre{Title = "Comedy", Description = "Tee hee."};
-            var dramaGenre = new Genre { Title = "Drama", Description = "Dramatic stuff." };
+            var actionGenre = new Genre { Title = "Action", Description = "Actionable stuff." };
             comedyGenre = _genreService.Create(comedyGenre);
-            dramaGenre = _genreService.Create(dramaGenre);
+            actionGenre = _genreService.Create(actionGenre);
 
             //Movies
             var comedyMovies = new List<Movie>
@@ -51,51 +52,51 @@ namespace MedtelligentMovies.Common.DAL.Initializers
                 new Movie
                 {
                     Title = "Stardust Memories",
-                    Genre = comedyGenre,
+                    GenreId = comedyGenre.Id,
                     Description = "Woody Allen plays Sandy Bates, a film-maker attending a retrospective of his works.",
                 },
                 new Movie
                 {
                     Title = "Ghostbusters",
-                    Genre = comedyGenre,
+                    GenreId = comedyGenre.Id,
                     Description = "Madcap undead antics in New York.",
                 },
                 new Movie
                 {
                     Title = "Dr. Strangelove",
-                    Genre = comedyGenre,
+                    GenreId = comedyGenre.Id,
                     Description = "Something about a bomb.",
                 },
                 new Movie
                 {
                     Title = "Bill & Ted's Excellent Adventure",
-                    Genre = comedyGenre,
+                    GenreId = comedyGenre.Id,
                     Description = "Folks crowd into a phone booth.",
                 },
                 new Movie
                 {
-                    Title = "b",
-                    Genre = comedyGenre,
-                    Description = "Something about a bomb.",
+                    Title = "Amazon Women on the Moon",
+                    GenreId = comedyGenre.Id,
+                    Description = "Amazon Women.  Not on Mars.",
                 },
                 new Movie
                 {
-                    Title = "c",
-                    Genre = comedyGenre,
-                    Description = "Something about a bomb.",
+                    Title = "Leonard Part 6",
+                    GenreId = comedyGenre.Id,
+                    Description = "Bill Cosby does it again!",
                 }
             };
             comedyMovies.ForEach(m =>_movieService.Create(m));
-           var dramaMovies = new List<Movie>
-           {    new Movie{Title = "1",Genre = dramaGenre,Description="1"},
-                new Movie{Title = "2",Genre = dramaGenre,Description="2"},
-                new Movie{Title = "3",Genre = dramaGenre,Description="3"},
-                new Movie{Title = "4",Genre = dramaGenre,Description="4"},
-                new Movie{Title = "5",Genre = dramaGenre,Description="5"},
-                new Movie{Title = "6",Genre = dramaGenre,Description="6"},
-                new Movie{Title = "7",Genre = dramaGenre,Description="7"}
+           var actionMovies = new List<Movie>
+           {    new Movie{Title = "Commando",GenreId = actionGenre.Id,Description="Arnold is back."},
+                new Movie{Title = "Star Wars",GenreId = actionGenre.Id,Description="It's Star Wars."},
+                new Movie{Title = "The Empire Strikes Back",GenreId = actionGenre.Id,Description="All Han."},
+                new Movie{Title = "Life of Pi",GenreId = actionGenre.Id,Description=""},
+                new Movie{Title = "Die Hard",GenreId = actionGenre.Id,Description=""},
+                new Movie{Title = "Pulp Fiction",GenreId = actionGenre.Id,Description=""},
+                new Movie{Title = "Kill Bill",GenreId = actionGenre.Id,Description=""}
             };
-           dramaMovies.ForEach(m =>_movieService.Create(m));
+           actionMovies.ForEach(m =>_movieService.Create(m));
         }
     }
 }

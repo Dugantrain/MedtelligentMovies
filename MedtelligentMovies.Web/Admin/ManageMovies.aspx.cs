@@ -17,7 +17,8 @@ namespace MedtelligentMovies.Web.Admin
         [Dependency]
         public IGenreService GenreService { get; set; }
         private IEnumerable<Movie> _movies;
-        private IEnumerable<Genre> _genres; 
+        private IEnumerable<Genre> _genres;
+        private bool _isGenreValid = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
@@ -31,6 +32,8 @@ namespace MedtelligentMovies.Web.Admin
                 ddlGenre.DataValueField = "Id";
                 ddlGenre.DataTextField = "Title";
                 ddlGenre.DataBind();
+
+                ddlGenre.Items.Insert(0, new ListItem("--Select--", "0"));
             }
             else
             {
@@ -40,6 +43,17 @@ namespace MedtelligentMovies.Web.Admin
             
             gvMovies.DataSource = _movies;
             gvMovies.DataBind();
+        }
+
+        protected void DropDownGenreValidation(object source, ServerValidateEventArgs arguments)
+        {
+            var selectedValue = arguments.Value;
+            if (selectedValue == "0")
+            {
+                arguments.IsValid = false;
+                return;
+            }
+            _isGenreValid = true;
         }
 
         protected void PopulateFieldsForUpdate(object sender, EventArgs e)
@@ -69,7 +83,8 @@ namespace MedtelligentMovies.Web.Admin
         {
             if (
                String.IsNullOrEmpty(txtDescription.Text) ||
-               String.IsNullOrEmpty(txtTitle.Text)) { return; }
+               String.IsNullOrEmpty(txtTitle.Text) ||
+                ddlGenre.SelectedIndex == 0) { return; }
 
             if (!String.IsNullOrEmpty(hdnId.Value))
             {

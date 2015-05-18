@@ -65,7 +65,7 @@
                 <nav>
                     <ul id="menu">
                         <li><a runat="server" href="/Public/Landing.aspx">Home</a></li>
-                        <li><a runat="server" href="/Admin/ManageUsers.aspx">Users</a></li>
+                        <li><a runat="server" href="/Admin/ManageUsers.aspx">Admins</a></li>
                         <li><a runat="server" href="/Admin/ManageGenres.aspx">Genres</a></li>
                         <li><a runat="server" href="/Admin/ManageMovies.aspx">Movies</a></li>
                     </ul>

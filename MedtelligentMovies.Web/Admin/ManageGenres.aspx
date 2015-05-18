@@ -60,7 +60,7 @@
                             <tr>
                               <td><asp:Label ID="lblDescription" runat="server" AssociatedControlID="txtDescription" 
                                              Text="Description" /></td>
-                              <td><asp:TextBox MaxLength="50" runat="server" ID="txtDescription" /></td>
+                              <td><asp:TextBox MaxLength="50" TextMode="MultiLine" runat="server" ID="txtDescription" /></td>
                                 <td>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDescription" ValidationGroup="saveValidation" CssClass="field-validation-error" ErrorMessage="Description is required." />
                               </td>
