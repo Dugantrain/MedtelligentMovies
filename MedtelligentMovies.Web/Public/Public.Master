@@ -9,7 +9,6 @@
           <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>  
     <webopt:BundleReference runat="server" Path="~/Content/css" /> 
-    <webopt:BundleReference runat="server" Path="~/Content/css" /> 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
     <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
@@ -72,32 +71,25 @@
                             <ul>
                                 <li><a id="loginLink" runat="server" href="~/Account/Login">Log in</a></li>
                             </ul>
-                            <nav>
-                    <ul id="menu">
-                        <li><asp:textbox id="txtMovieSearch" runat="server"/></li>
-                        <li><a runat="server" href="/Public/Landing.aspx">Home</a></li>
-                    </ul>
-                </nav>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <p>
                                 Hello, <asp:LoginName runat="server" CssClass="username" /></a>!
                                 <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
                             </p>
-                            <nav>
-                    <ul id="menu">
-                        <li><asp:textbox id="txtMovieSearch" runat="server"/></li>
-                        <li><a runat="server" href="/Public/Landing.aspx">Home</a></li>
-                        <li><a runat="server" href="/Admin/ManageUsers.aspx">Admin</a></li>
-                    </ul>
-                </nav>
                         </LoggedInTemplate>
                     </asp:LoginView>
+                    <nav>
+                        <ul id="menu">
+                            <li><asp:textbox id="txtMovieSearch" runat="server"/></li>
+                            <li><a runat="server" href="/Public/Landing.aspx">Home</a></li>
+                        </ul>
+                    </nav>
                 </section>
                 
                 <script type="text/javascript">
                     $(document).ready(function () {
-                        $('#ctl10_txtMovieSearch').autocomplete({
+                        $('#<%=txtMovieSearch.ClientID%>').autocomplete({
                             source: function (request, response) {
                                 var autocompleteUrl = '/api/MovieSearch?searchText=' + request.term;
                                 $.ajax({

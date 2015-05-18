@@ -20,6 +20,7 @@
                                     <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
                                     <asp:BoundField DataField="Title" HeaderText="Title"/>
                                     <asp:BoundField DataField="Description" HeaderText="Description"/>
+                                    <%--Directly binding sub-objects like below yields inconsistent results.  Using RowDataBound event--%>
                                     <asp:BoundField DataField="Genre.Title" HeaderText="Genre"/>
                                     <asp:TemplateField>
                                         <ItemTemplate>

@@ -15,13 +15,14 @@
                 <td style="height: 206px" valign="top">
                     <asp:UpdatePanel ID="UserUpdatePanel" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
-                            <asp:GridView ID="gvUsers" OnRowDataBound="gvUsers_RowDataBound" runat="server" AutoGenerateColumns="false">
+                            <asp:GridView ID="gvUsers" GridLines="None" RowStyle-CssClass="row" OnRowDataBound="gvUsers_RowDataBound" AlternatingRowStyle-CssClass="alt-row"
+                                CellPadding="4" CssClass="Grid"  runat="server" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
-                                    <asp:BoundField DataField="UserName"/>
-                                    <asp:BoundField DataField="Email"/>
-                                    <asp:BoundField DataField="FirstName"/>
-                                    <asp:BoundField DataField="LastName"/>
+                                    <asp:BoundField DataField="UserName" HeaderText="Admin"/>
+                                    <asp:BoundField DataField="Email" HeaderText="Email"/>
+                                    <asp:BoundField DataField="FirstName" HeaderText="First Name"/>
+                                    <asp:BoundField DataField="LastName" HeaderText="Last Name"/>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:Button runat="server" ID="btnUpdate" CommandArgument='<%# Eval("Id") %>' OnClick="PopulateFieldsForUpdate" Text="Update" CommandName="Update"/>

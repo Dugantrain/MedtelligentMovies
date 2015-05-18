@@ -55,8 +55,7 @@
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <p>
-                                Hello, <a runat="server" class="username" href="~/Account/Manage" title="Manage your account">
-                                    <asp:LoginName runat="server" CssClass="username" /></a>!
+                                Hello, <asp:LoginName runat="server" CssClass="username" />!
                                 <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/" />
                             </p>
                         </LoggedInTemplate>

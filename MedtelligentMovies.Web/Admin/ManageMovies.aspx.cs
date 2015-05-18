@@ -132,6 +132,7 @@ namespace MedtelligentMovies.Web.Admin
             {
                 var movie = (Movie) e.Row.DataItem;
                 var genre = _genres.Single(g => g.Id == movie.GenreId);
+                //Man, there's got to be a better way to do this.
                 e.Row.Cells[3].Text = genre.Title;
             }
         }
