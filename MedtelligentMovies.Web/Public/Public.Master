@@ -83,6 +83,11 @@
                         <ul id="menu">
                             <li><asp:textbox id="txtMovieSearch" runat="server"/></li>
                             <li><a runat="server" href="/Public/Landing.aspx">Home</a></li>
+                            <asp:LoginView runat="server" ViewStateMode="Disabled">
+                            <LoggedInTemplate>
+                                <li><a runat="server" href="/Admin/ManageMovies.aspx">Admin</a></li>
+                            </LoggedInTemplate>
+                    </asp:LoginView>
                         </ul>
                     </nav>
                 </section>
