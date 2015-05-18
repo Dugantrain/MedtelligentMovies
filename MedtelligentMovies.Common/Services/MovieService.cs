@@ -16,6 +16,7 @@ namespace MedtelligentMovies.Common.Services
         Movie Create(Movie movie);
         Movie ChangeTitle(int movieId, string currentTitle);
         Movie ChangeDescription(int movieId, string currentDescription);
+        Movie ChangeGenre(int movieId, int currentGenreId);
         void DeleteMovie(int movieId);
         IEnumerable<Movie> GetMoviesBySearchText(string searchText);
         IList<Movie> GetMovies(int startIndex, int numResults);
@@ -68,6 +69,14 @@ namespace MedtelligentMovies.Common.Services
         {
             var movie = _movieRepository.GetMovieById(movieId);
             movie.Description = currentDescription;
+            _movieRepository.UpdateMovie(movie);
+            return movie;
+        }
+
+        public Movie ChangeGenre(int movieId, int currentGenreId)
+        {
+            var movie = _movieRepository.GetMovieById(movieId);
+            movie.GenreId = currentGenreId;
             _movieRepository.UpdateMovie(movie);
             return movie;
         }

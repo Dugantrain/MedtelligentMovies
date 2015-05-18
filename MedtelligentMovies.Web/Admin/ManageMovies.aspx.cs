@@ -77,6 +77,8 @@ namespace MedtelligentMovies.Web.Admin
                 var movie = MovieService.GetMovieById(Convert.ToInt32(hdnId.Value));
                 if (movie.Title != txtTitle.Text) MovieService.ChangeTitle(movie.Id, txtTitle.Text);
                 if (movie.Description != txtDescription.Text) MovieService.ChangeDescription(movie.Id, txtDescription.Text);
+                var currentGenreId = Convert.ToInt32(ddlGenre.SelectedValue);
+                if (movie.GenreId != currentGenreId)MovieService.ChangeGenre(movie.Id, currentGenreId);
             }
             else
             {
