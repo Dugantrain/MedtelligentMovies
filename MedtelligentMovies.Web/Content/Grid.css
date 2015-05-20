@@ -5,18 +5,29 @@
        border-collapse:collapse; 
        font-family:Calibri; 
        color: #474747;
-
+       table-layout:fixed;
 }
 .Grid tr {
     CellPadding: "5";
 }
 .Grid td {
       padding: 5px;
-      border: solid 1px #c1c1c1; }
+      border: solid 1px #c1c1c1; 
+      overflow: hidden;
+      width: 100px;
+}
+
 .Grid tr td:first-child
 {
     font-size: 1.25em;
     font-weight:bold
+}
+.Grid tr td:last-child
+{
+    padding: 5px;
+    border: solid 1px #c1c1c1; 
+    overflow: hidden;
+    width: 20px;
 }
 .Grid th  {
       padding : 4px 5px;
