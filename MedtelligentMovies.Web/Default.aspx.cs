@@ -16,14 +16,7 @@ namespace MedtelligentMovies.Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                Response.Redirect("~/Admin/ManageMovies.aspx");
-            }
-            else
-            {
                 Response.Redirect("~/Public/Landing.aspx");
-            }  
         }
     }
 }

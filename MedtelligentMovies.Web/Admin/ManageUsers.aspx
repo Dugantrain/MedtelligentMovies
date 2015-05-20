@@ -90,6 +90,7 @@
                                     <asp:BoundField DataField="FirstName" HeaderText="First Name"/>
                                     <asp:BoundField DataField="LastName" HeaderText="Last Name"/>
                                     <asp:TemplateField>
+                                        <ItemStyle Width="20px"/>
                                         <ItemTemplate>
                                             <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteUser" Text="Delete" CommandName="Delete"/>
                                         </ItemTemplate>

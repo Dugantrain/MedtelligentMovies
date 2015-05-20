@@ -61,7 +61,7 @@
         <div class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">
-                    <a runat="server" href="~/">your logo here</a>
+                    <a runat="server" href="~/"><img src="/Images/alis-logo.png" alt="ALIS Online"/></a>
                 </p>
             </div>
             <div class="float-right">
@@ -128,9 +128,7 @@
                             },
                             minLength: 1,
                             select: function (event, ui) {
-                                lblMessage.innerText = "Your Selected Name :";
-                                lblSelectedVal.innerText = ui.item.label;
-                                $('#txtName').val(ui.item.label);
+                                alert('Queued! (Not really queued).');
                                 return false;
                             }
                         });

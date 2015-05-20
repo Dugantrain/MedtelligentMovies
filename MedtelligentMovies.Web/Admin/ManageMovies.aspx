@@ -70,6 +70,7 @@
                                     <asp:BoundField DataField="Genre.Title" HeaderText="Genre"/>
                                     <asp:BoundField DataField="CreatedDate" dataformatstring="{0:MM/dd/yyyy}" HeaderText="Created On" HeaderStyle-HorizontalAlign="Left" />
                                     <asp:TemplateField>
+                                        <ItemStyle Width="20px"/>
                                         <ItemTemplate>
                                             <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteMovie" Text="Delete" CommandName="Delete"/>
                                         </ItemTemplate>

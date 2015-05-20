@@ -233,6 +233,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Images\accent.png" />
+    <Content Include="Images\alis-logo.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\grid-alt.png" />
     <Content Include="Images\grid-header.png" />

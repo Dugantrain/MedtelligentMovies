@@ -64,6 +64,7 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField>
+                                        <ItemStyle Width="20px"/>
                                         <ItemTemplate>
                                             <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteGenre" Text="Delete" CommandName="Delete"/>
                                         </ItemTemplate>
