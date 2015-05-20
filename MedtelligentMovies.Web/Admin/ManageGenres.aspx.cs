@@ -28,17 +28,6 @@ namespace MedtelligentMovies.Web.Admin
             gvGenres.DataBind();
         }
 
-        protected void PopulateFieldsForUpdate(object sender, EventArgs e)
-        {
-            var lnkUpdate = (Button)sender;
-            var genreId = Convert.ToInt32(lnkUpdate.CommandArgument);
-            var genre = GenreService.GetGenreById(genreId);
-            hdnId.Value = genre.Id.ToString();
-            txtTitle.Text = genre.Title;
-            txtDescription.Text = genre.Description;
-            InsertUpdateGenrePanel.Update();
-        }
-
         protected void DeleteGenre(object sender, EventArgs e)
         {
             var lnkRemove = (Button)sender;
@@ -53,7 +42,6 @@ namespace MedtelligentMovies.Web.Admin
         protected void SaveButton_Click(object sender, EventArgs e)
         {
             if (
-               String.IsNullOrEmpty(txtDescription.Text) ||
                String.IsNullOrEmpty(txtTitle.Text) ){ return; }
 
             if (!String.IsNullOrEmpty(hdnId.Value))
@@ -81,6 +69,7 @@ namespace MedtelligentMovies.Web.Admin
 
             txtTitle.Text = String.Empty;
             txtDescription.Text = String.Empty;
+            InsertUpdateGenrePanel.Update();
         }
 
         protected void CancelButton_Click(object sender, EventArgs e)
@@ -111,7 +100,7 @@ namespace MedtelligentMovies.Web.Admin
             {
                 if (row.RowIndex == gvGenres.SelectedIndex)
                 {
-
+                    row.CssClass = "selected-row";
                     var genreId = gvGenres.DataKeys[row.RowIndex]["Id"];
                     var genre = GenreService.GetGenreById(Convert.ToInt32(genreId));
                     hdnId.Value = genre.Id.ToString();

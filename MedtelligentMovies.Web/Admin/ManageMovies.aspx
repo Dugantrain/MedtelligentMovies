@@ -60,7 +60,7 @@
                     <asp:UpdatePanel ID="MovieUpdatePanel" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <asp:HiddenField ID ="hdnSelectedMovieId" runat="server"/>
-                            <asp:GridView ID="gvMovies" DataKeyNames="Id" OnSelectedIndexChanged="OnSelectedIndexChanged" GridLines="None" RowStyle-CssClass="row" AlternatingRowStyle-CssClass="alt-row" OnRowDataBound="gvMovies_RowDataBound" 
+                            <asp:GridView ID="gvMovies" DataKeyNames="Id" OnSelectedIndexChanged="OnSelectedIndexChanged" GridLines="None" RowStyle-CssClass="row" AlternatingRowStyle-CssClass="alt-row" SelectedRowStyle="selected-row" OnRowDataBound="gvMovies_RowDataBound" 
                                 CellPadding="4" CssClass="Grid" runat="server" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>

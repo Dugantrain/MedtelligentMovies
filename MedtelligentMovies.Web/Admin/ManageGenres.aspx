@@ -33,7 +33,6 @@
                                              Text="Description" /></td>
                               <td><asp:TextBox MaxLength="50" TextMode="MultiLine" runat="server" ID="txtDescription" /></td>
                                 <td>
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDescription" ValidationGroup="saveValidation" CssClass="field-validation-error" ErrorMessage="Description is required." />
                               </td>
                             </tr>
                             <tr>
@@ -53,18 +52,13 @@
                     <asp:UpdatePanel ID="GenreUpdatePanel" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                            <asp:HiddenField ID ="hdnSelectedGenreId" runat="server"/>
-                            <asp:GridView ID="gvGenres" DataKeyNames="Id" OnSelectedIndexChanged="OnSelectedIndexChanged" OnRowDataBound="gvGenres_RowDataBound" GridLines="None" RowStyle-CssClass="row" AlternatingRowStyle-CssClass="alt-row"
+                            <asp:GridView ID="gvGenres" DataKeyNames="Id" OnSelectedIndexChanged="OnSelectedIndexChanged" OnRowDataBound="gvGenres_RowDataBound" GridLines="None" RowStyle-CssClass="row" AlternatingRowStyle-CssClass="alt-row" SelectedRowStyle="selected-row"
                                 CellPadding="4" CssClass="Grid"  runat="server" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
                                     <asp:BoundField DataField="Title" HeaderText="Title"/>
                                     <asp:BoundField DataField="Description" HeaderText="Description"/>
                                     <asp:BoundField DataField="NumMovies" HeaderText="# Movies"/>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:Button runat="server" ID="btnUpdate" CommandArgument='<%# Eval("Id") %>' OnClick="PopulateFieldsForUpdate" Text="Update" CommandName="Update"/>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteGenre" Text="Delete" CommandName="Delete"/>

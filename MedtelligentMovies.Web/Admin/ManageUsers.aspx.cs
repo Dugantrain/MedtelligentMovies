@@ -65,20 +65,6 @@ namespace MedtelligentMovies.Web.Admin
             _isUserNameValid = true;
         }
 
-        protected void PopulateFieldsForUpdate(object sender, EventArgs e)
-        {
-            var lnkUpdate = (Button)sender;
-            var userId = Convert.ToInt32(lnkUpdate.CommandArgument);
-            var user = UserService.GetUserById(userId);
-            hdnId.Value = user.Id.ToString();
-            txtFirstName.Text = user.FirstName;
-            txtLastName.Text = user.LastName;
-            txtEmail.Text = user.Email;
-            txtPassword.Text = user.EncryptedPassword.Decrypt();
-            txtUserName.Text = user.UserName;
-            InsertUserUpdatePanel.Update();
-        }
-
         protected void DeleteUser(object sender, EventArgs e)
         {
             var lnkRemove = (Button)sender;
@@ -137,6 +123,8 @@ namespace MedtelligentMovies.Web.Admin
             txtEmail.Text = String.Empty;
             txtFirstName.Text = String.Empty;
             txtLastName.Text = String.Empty;
+
+            InsertUserUpdatePanel.Update();
         }
 
         protected void gvUsers_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -146,12 +134,10 @@ namespace MedtelligentMovies.Web.Admin
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 var deleteButton = (Button) e.Row.FindControl("btnDelete");
-                var updateButton = (Button) e.Row.FindControl("btnUpdate");
                 var user = (User) e.Row.DataItem;
                 //Can't delete or update the original Admin User.
                 if (user.Id == 1)
                 {
-                    updateButton.Visible = false;
                     deleteButton.Visible = false;
                 }
                 //Can't delete yourself.
@@ -170,16 +156,6 @@ namespace MedtelligentMovies.Web.Admin
             }
         }
 
-        protected void CancelButton_Click(object sender, EventArgs e)
-        {
-            hdnId.Value = String.Empty;
-            txtUserName.Text = String.Empty;
-            txtPassword.Text = String.Empty;
-            txtEmail.Text = String.Empty;
-            txtFirstName.Text = String.Empty;
-            txtLastName.Text = String.Empty;
-            InsertUserUpdatePanel.Update();
-        }
 
         protected void OnSelectedIndexChanged(object sender, EventArgs e)
         {
@@ -187,6 +163,7 @@ namespace MedtelligentMovies.Web.Admin
             {
                 if (row.RowIndex == gvUsers.SelectedIndex)
                 {
+                    row.CssClass = "selected-row";
                     var userId = gvUsers.DataKeys[row.RowIndex]["Id"];
                     var user = UserService.GetUserById(Convert.ToInt32(userId));
                     hdnId.Value = user.Id.ToString();
@@ -195,6 +172,7 @@ namespace MedtelligentMovies.Web.Admin
                     txtEmail.Text = user.Email;
                     txtPassword.Text = user.EncryptedPassword.Decrypt();
                     txtUserName.Text = user.UserName;
+                    InsertUserUpdatePanel.Update();
                 }
             }
         }

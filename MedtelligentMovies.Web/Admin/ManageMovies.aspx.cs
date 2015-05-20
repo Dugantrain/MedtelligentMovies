@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -126,7 +127,6 @@ namespace MedtelligentMovies.Web.Admin
                 var clickPostback = Page.ClientScript.GetPostBackClientHyperlink(gvMovies, "Select$" + e.Row.RowIndex);
                 e.Row.Attributes.Add("onClick",
                     "ChangeSelectedRowColorOnClick('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedMovieId.ClientID + "');" + clickPostback);
-                
                 e.Row.Attributes.Add("onmouseout",
                     "PreserveClickedRowStyleOnMouseOut('" + gvMovies.ClientID + "','" + hdnSelectedMovieId.ClientID + "')");
 
@@ -141,6 +141,8 @@ namespace MedtelligentMovies.Web.Admin
             {
                 if (row.RowIndex == gvMovies.SelectedIndex)
                 {
+                    row.CssClass = "selected-row";
+
                     var movieId = gvMovies.DataKeys[row.RowIndex]["Id"];
                     var movie = MovieService.GetMovieById(Convert.ToInt32(movieId));
                     hdnId.Value = movie.Id.ToString();

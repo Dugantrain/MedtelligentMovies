@@ -69,7 +69,6 @@
                               <td></td>
                               <td>
                                 <asp:Button ID="SaveButton" runat="server" ValidationGroup="saveValidation"  Text="Save" OnClick="SaveButton_Click"/>
-                                <asp:Button ID="Cancelbutton"  runat="server" Text="Cancel" OnClick="CancelButton_Click"/>
                               </td>
                             </tr>
                           </table>
@@ -82,7 +81,7 @@
                     <asp:UpdatePanel ID="UserUpdatePanel" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <asp:HiddenField ID ="hdnSelectedUserId" runat="server"/>
-                            <asp:GridView ID="gvUsers" DataKeyNames="Id" OnSelectedIndexChanged="OnSelectedIndexChanged" GridLines="None" RowStyle-CssClass="row" OnRowDataBound="gvUsers_RowDataBound" AlternatingRowStyle-CssClass="alt-row"
+                            <asp:GridView ID="gvUsers" DataKeyNames="Id" OnSelectedIndexChanged="OnSelectedIndexChanged" GridLines="None" RowStyle-CssClass="row" OnRowDataBound="gvUsers_RowDataBound" AlternatingRowStyle-CssClass="alt-row" SelectedRowStyle="selected-row"
                                 CellPadding="4" CssClass="Grid"  runat="server" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
@@ -90,11 +89,6 @@
                                     <asp:BoundField DataField="Email" HeaderText="Email"/>
                                     <asp:BoundField DataField="FirstName" HeaderText="First Name"/>
                                     <asp:BoundField DataField="LastName" HeaderText="Last Name"/>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:Button runat="server" ID="btnUpdate" CommandArgument='<%# Eval("Id") %>' OnClick="PopulateFieldsForUpdate" Text="Update" CommandName="Update"/>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteUser" Text="Delete" CommandName="Delete"/>

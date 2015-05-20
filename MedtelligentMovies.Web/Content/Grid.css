@@ -41,6 +41,11 @@
 
 .alt-row
 {
-    background-color: #cffdd4;
+    background-color: #fff;
+}
+
+.selected-row
+{
+    background-color: #ffff00;
 }
 
