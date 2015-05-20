@@ -134,11 +134,11 @@ namespace MedtelligentMovies.Web.Admin
                 var genre = _genres.Single(g => g.Id == movie.GenreId);
 
                 e.Row.Attributes.Add("onmouseover",
-                    "ChangeMouseOverRowColor('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "')");
+                    "ChangeMouseOverRowColor('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedMovieId.ClientID + "')");
                 e.Row.Attributes.Add("onClick",
-                    "ChangeSelectedRowColorOnClick('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "')");
+                    "ChangeSelectedRowColorOnClick('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedMovieId.ClientID + "')");
                 e.Row.Attributes.Add("onmouseout",
-                    "PreserveClickedRowStyleOnMouseOut('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "')");
+                    "PreserveClickedRowStyleOnMouseOut('" + gvMovies.ClientID + "','" + hdnSelectedMovieId.ClientID + "')");
 
                 //Man, there's got to be a better way to do this.
                 e.Row.Cells[3].Text = genre.Title;

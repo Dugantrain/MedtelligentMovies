@@ -256,6 +256,7 @@
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Public\Landing.aspx" />
     <Content Include="Public\Genre.aspx" />
+    <Content Include="Scripts\Grid.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
