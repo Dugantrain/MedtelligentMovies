@@ -95,8 +95,8 @@
                 var gridViewRows = gridViewControl.rows;
                 if (gridViewRows != null) {
                     var selectedRowId = $("#" + '<%= hdnSelectedMovieId.ClientID %>').val();
-                    if (selectedRowId == rowId)return;
                     for (var i = 1; i < gridViewRows.length; i++) {
+                        if(selectedRowId == i)continue;
                         var row = gridViewRows[i];
                         row.style.backgroundColor = "";
                         }
@@ -143,7 +143,6 @@
                     }
                 }
             }
-
         }
     </script>
 </asp:Content>
