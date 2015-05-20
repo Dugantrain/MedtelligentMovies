@@ -428,7 +428,7 @@ fieldset {
             border: inherit;
             width: auto;
         }
-        
+    input[type="image"],
     input[type="submit"],
     input[type="button"],
     button {
@@ -503,6 +503,13 @@ input[type="checkbox"].input-validation-error {
 
 .validation-summary-valid {
     display: none;
+}
+
+.delete-image {
+    background-color: transparent;
+    border-style: none;
+    border-width: 0;
+    width: 20px
 }
 
 

@@ -92,7 +92,7 @@
                                     <asp:TemplateField>
                                         <ItemStyle Width="20px"/>
                                         <ItemTemplate>
-                                            <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteUser" Text="Delete" CommandName="Delete"/>
+                                            <asp:ImageButton ImageUrl="/Images/Trash-can.png" CssClass="delete-image" BorderStyle="None" BackColor="transparent" Width="20px"   runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteUser" Text="Delete" CommandName="Delete"/>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

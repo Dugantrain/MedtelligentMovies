@@ -67,7 +67,7 @@ namespace MedtelligentMovies.Web.Admin
 
         protected void DeleteUser(object sender, EventArgs e)
         {
-            var lnkRemove = (Button)sender;
+            var lnkRemove = (ImageButton)sender;
             var userId = Convert.ToInt32(lnkRemove.CommandArgument);
             UserService.DeleteUser(userId);
             _users = UserService.GetUsers(0, Int32.MaxValue);
@@ -133,7 +133,7 @@ namespace MedtelligentMovies.Web.Admin
             var contextUser = UserService.GetUserByUsername(contextUserName);
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                var deleteButton = (Button) e.Row.FindControl("btnDelete");
+                var deleteButton = (ImageButton) e.Row.FindControl("btnDelete");
                 var user = (User) e.Row.DataItem;
                 //Can't delete or update the original Admin User.
                 if (user.Id == 1)

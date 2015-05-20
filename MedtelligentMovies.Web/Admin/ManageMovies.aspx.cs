@@ -59,7 +59,7 @@ namespace MedtelligentMovies.Web.Admin
 
         protected void DeleteMovie(object sender, EventArgs e)
         {
-            var lnkRemove = (Button)sender;
+            var lnkRemove = (ImageButton)sender;
             var movieId = Convert.ToInt32(lnkRemove.CommandArgument);
             MovieService.DeleteMovie(movieId);
             _movies = MovieService.GetMovies(0, Int32.MaxValue);

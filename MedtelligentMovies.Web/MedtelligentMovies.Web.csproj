@@ -252,6 +252,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Trash-can.png" />
     <Content Include="packages.config" />
     <Content Include="Admin\Admin.Master" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />

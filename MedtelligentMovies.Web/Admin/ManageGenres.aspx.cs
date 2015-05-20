@@ -30,7 +30,7 @@ namespace MedtelligentMovies.Web.Admin
 
         protected void DeleteGenre(object sender, EventArgs e)
         {
-            var lnkRemove = (Button)sender;
+            var lnkRemove = (ImageButton)sender;
             var genreId = Convert.ToInt32(lnkRemove.CommandArgument);
             GenreService.DeleteGenre(genreId);
             _genres = GenreService.GetGenres(0, Int32.MaxValue);
