@@ -29,12 +29,12 @@ namespace MedtelligentMovies.Web.Public
                 var genreIds = genres.Select(g => g.Id).ToArray();
                 var topMoviesByGenreIds = MovieService.GetTopMoviesByGenreIds(genreIds, NumMoviesPerGenre);
                 _topMoviesByGenreIds = topMoviesByGenreIds;
-                gvGenres.DataSource = genres;
-                gvGenres.DataBind();
+                dlGenres.DataSource = genres;
+                dlGenres.DataBind();
             }
         }
 
-        protected void gvGenres_ItemDataBound(object sender, DataListItemEventArgs e)
+        protected void dlGenres_ItemDataBound(object sender, DataListItemEventArgs e)
         {
             if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
             var genreId = ((Common.Models.Genre)e.Item.DataItem).Id;
@@ -48,5 +48,55 @@ namespace MedtelligentMovies.Web.Public
                 gvTopMovies.DataBind();
             }
         }
+
+        protected void gvMovies_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var hdnSelectedMovieId = ((HiddenField)e.Row.Parent.Parent.Parent.FindControl("hdnSelectedMovieId"));
+                var gvTopMovies = (GridView) e.Row.Parent.Parent.Parent.FindControl("gvTopMovies");
+                e.Row.Attributes.Add("onmouseover",
+                    "ChangeMouseOverRowColor('" + gvTopMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedMovieId.ClientID + "')");
+                var clickPostback = Page.ClientScript.GetPostBackClientHyperlink(gvTopMovies, "Select$" + e.Row.RowIndex);
+                e.Row.Attributes.Add("onClick",
+                    "ChangeSelectedRowColorOnClick('" + gvTopMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedMovieId.ClientID + "');" + clickPostback);
+                e.Row.Attributes.Add("onmouseout",
+                    "PreserveClickedRowStyleOnMouseOut('" + gvTopMovies.ClientID + "','" + hdnSelectedMovieId.ClientID + "')");
+            }
+        }
+
+        protected void OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Set every row in every cell back to their default color
+            GridView gvTopMovies;
+            foreach (DataListItem dataItem in dlGenres.Items)
+            {
+                gvTopMovies = (GridView) dataItem.FindControl("gvTopMovies");
+                foreach (GridViewRow row in gvTopMovies.Rows)
+                {
+                    if ((row.DataItemIndex % 2) == 0)
+                    {
+                        row.CssClass = "row";
+                    }
+                    else
+                    {
+                        row.CssClass = "alt-row";
+                    }
+                }
+                
+            }
+
+            //Set the selected row to the selected-row style
+            gvTopMovies = (GridView)sender;
+            foreach (GridViewRow row in gvTopMovies.Rows)
+            {
+                if (row.RowIndex == gvTopMovies.SelectedIndex)
+                {
+                    row.CssClass = "selected-row";
+                }
+            }
+            var movieUpdatePanel = (UpdatePanel)gvTopMovies.Parent.Parent;
+            movieUpdatePanel.Update();
+ }
     }
 }

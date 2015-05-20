@@ -58,7 +58,11 @@
                                     <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
                                     <asp:BoundField DataField="Title" HeaderText="Title"/>
                                     <asp:BoundField DataField="Description" HeaderText="Description"/>
-                                    <asp:BoundField DataField="NumMovies" HeaderText="# Movies"/>
+                                    <asp:TemplateField HeaderText="# Movies">
+                                        <ItemTemplate>
+                                           <asp:HyperLink runat="server" ID="lnkGenre" Text='<%# Eval("NumMovies") %>' NavigateUrl='<%# "/public/genre.aspx?g=" + Eval("Id") %>' />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteGenre" Text="Delete" CommandName="Delete"/>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="Public.Master" AutoEventWireup="true" CodeBehind="Landing.aspx.cs" Inherits="MedtelligentMovies.Web.Public.Default" %>
+﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="Public.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="Landing.aspx.cs" Inherits="MedtelligentMovies.Web.Public.Default" %>
 
 <asp:Content runat="server" ID="FeaturedContent" ContentPlaceHolderID="FeaturedContent">
     <section class="featured">
@@ -10,28 +10,47 @@
     </section>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <asp:DataList ID="gvGenres" OnItemDataBound="gvGenres_ItemDataBound" RepeatColumns="2" RepeatDirection="Horizontal" RepeatLayout="Table"  AutoGenerateColumns="false" runat="server">
-                <ItemTemplate>
-                    <table>
-                    <tr>
-                        <td>
-                            <asp:HyperLink runat="server" ID="lnkGenre" Text='<%# Eval("Title") %>' NavigateUrl='<%# "genre.aspx?g=" + Eval("Id") %>' />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-<%--                            <div id="div<%# Eval("Id") %>" style="display: none; position: relative; left: 15px; overflow: auto">--%>
-                                <asp:GridView ID="gvTopMovies" CssClass="Grid" runat="server" AutoGenerateColumns="false" GridLines="None" >
-                                <Columns>
-                                    <asp:BoundField DataField="Id" Visible="false" HeaderText="Id" HeaderStyle-HorizontalAlign="Left" />
-                                    <asp:BoundField DataField="Title" HeaderText="Title" HeaderStyle-HorizontalAlign="Left" />
-                                    <asp:BoundField DataField="Description" HeaderText="Description" HeaderStyle-HorizontalAlign="Left" />
-                                </Columns>
-                                </asp:GridView>
-<%--                            </div>--%>
-                        </td>
-                    </tr>
-                        </table>
-                </ItemTemplate>
-    </asp:DataList>
+    <table>
+        <tr>
+            <td>
+                <asp:UpdatePanel ID="genreUpdatePanel" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
+                    <asp:DataList ID="dlGenres" ItemStyle-VerticalAlign="Top" OnItemDataBound="dlGenres_ItemDataBound" RepeatColumns="2" RepeatDirection="Horizontal" RepeatLayout="Table"  AutoGenerateColumns="false" runat="server">
+                        <ItemTemplate>
+                            <table>
+                            <tr>
+                                <td>
+                                    <h2>
+                                    <asp:HyperLink runat="server" ID="lnkGenre" Text='<%# Eval("Title") %>' NavigateUrl='<%# "genre.aspx?g=" + Eval("Id") %>' />
+                                    </h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:UpdatePanel ID="MovieUpdatePanel" runat="server" UpdateMode="Conditional">
+                                        <ContentTemplate>
+                                        <asp:HiddenField ID ="hdnSelectedMovieId" runat="server"/>
+                                        <asp:GridView ID="gvTopMovies" CssClass="Grid" OnSelectedIndexChanged="OnSelectedIndexChanged"
+                                            OnRowDataBound="gvMovies_RowDataBound" RowStyle-CssClass="row" 
+                                            AlternatingRowStyle-CssClass="alt-row" runat="server" AutoGenerateColumns="false" 
+                                            GridLines="None" >
+                                        <Columns>
+                                            <asp:BoundField DataField="Id" Visible="false" HeaderText="Id" HeaderStyle-HorizontalAlign="Left" />
+                                            <asp:BoundField DataField="Title" HeaderText="Title" HeaderStyle-HorizontalAlign="Left" />
+                                            <asp:BoundField DataField="Description" HeaderText="Description" HeaderStyle-HorizontalAlign="Left" />
+                                        </Columns>
+                                        </asp:GridView>
+                                       </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                </td>
+                            </tr>
+                                </table>
+                        </ItemTemplate>
+                    </asp:DataList>
+                    </ContentTemplate>
+               </asp:UpdatePanel>
+            </td>
+        </tr>
+    </table>
+    
 </asp:Content>

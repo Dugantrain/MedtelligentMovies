@@ -13,12 +13,12 @@ namespace MedtelligentMovies.Web.Public {
     public partial class Default {
         
         /// <summary>
-        /// gvGenres control.
+        /// dlGenres control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataList gvGenres;
+        protected global::System.Web.UI.WebControls.DataList dlGenres;
     }
 }
