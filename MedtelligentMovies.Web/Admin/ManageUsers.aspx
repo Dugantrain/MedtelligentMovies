@@ -11,37 +11,6 @@
 </asp:Content>
 <asp:Content ID="body" ContentPlaceHolderID="MainContent" runat="server">
         <table>
-           <tr>
-                <td style="height: 206px" valign="top">
-                    <asp:UpdatePanel ID="UserUpdatePanel" runat="server" UpdateMode="Conditional">
-                        <ContentTemplate>
-                            <asp:GridView ID="gvUsers" GridLines="None" RowStyle-CssClass="row" OnRowDataBound="gvUsers_RowDataBound" AlternatingRowStyle-CssClass="alt-row"
-                                CellPadding="4" CssClass="Grid"  runat="server" AutoGenerateColumns="false">
-                                <Columns>
-                                    <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
-                                    <asp:BoundField DataField="UserName" HeaderText="Admin"/>
-                                    <asp:BoundField DataField="Email" HeaderText="Email"/>
-                                    <asp:BoundField DataField="FirstName" HeaderText="First Name"/>
-                                    <asp:BoundField DataField="LastName" HeaderText="Last Name"/>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:Button runat="server" ID="btnUpdate" CommandArgument='<%# Eval("Id") %>' OnClick="PopulateFieldsForUpdate" Text="Update" CommandName="Update"/>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteUser" Text="Delete" CommandName="Delete"/>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                </Columns>
-                            </asp:GridView>
-                        </ContentTemplate>
-                        <Triggers>
-                            <asp:AsyncPostBackTrigger ControlID="SaveButton" EventName="Click" />
-                        </Triggers>
-                    </asp:UpdatePanel>
-                </td>
-            </tr>
             <tr>
                 <td style="height: 206px" valign="top">
                     <asp:UpdatePanel ID="InsertUserUpdatePanel"  runat="server" UpdateMode="Conditional">
@@ -105,6 +74,38 @@
                             </tr>
                           </table>
                         </ContentTemplate>
+                    </asp:UpdatePanel>
+                </td>
+            </tr>
+           <tr>
+                <td style="height: 206px" valign="top">
+                    <asp:UpdatePanel ID="UserUpdatePanel" runat="server" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <asp:HiddenField ID ="hdnSelectedUserId" runat="server"/>
+                            <asp:GridView ID="gvUsers" DataKeyNames="Id" OnSelectedIndexChanged="OnSelectedIndexChanged" GridLines="None" RowStyle-CssClass="row" OnRowDataBound="gvUsers_RowDataBound" AlternatingRowStyle-CssClass="alt-row"
+                                CellPadding="4" CssClass="Grid"  runat="server" AutoGenerateColumns="false">
+                                <Columns>
+                                    <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
+                                    <asp:BoundField DataField="UserName" HeaderText="Admin"/>
+                                    <asp:BoundField DataField="Email" HeaderText="Email"/>
+                                    <asp:BoundField DataField="FirstName" HeaderText="First Name"/>
+                                    <asp:BoundField DataField="LastName" HeaderText="Last Name"/>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:Button runat="server" ID="btnUpdate" CommandArgument='<%# Eval("Id") %>' OnClick="PopulateFieldsForUpdate" Text="Update" CommandName="Update"/>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteUser" Text="Delete" CommandName="Delete"/>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                            </asp:GridView>
+                        </ContentTemplate>
+                        <Triggers>
+                            <asp:AsyncPostBackTrigger ControlID="SaveButton" EventName="Click" />
+                        </Triggers>
                     </asp:UpdatePanel>
                 </td>
             </tr>

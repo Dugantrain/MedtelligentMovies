@@ -60,7 +60,7 @@
                     <asp:UpdatePanel ID="MovieUpdatePanel" runat="server" UpdateMode="Conditional">
                         <ContentTemplate>
                             <asp:HiddenField ID ="hdnSelectedMovieId" runat="server"/>
-                            <asp:GridView ID="gvMovies" GridLines="None" RowStyle-CssClass="row" AlternatingRowStyle-CssClass="alt-row" OnRowDataBound="gvMovies_RowDataBound" 
+                            <asp:GridView ID="gvMovies" DataKeyNames="Id" OnSelectedIndexChanged="OnSelectedIndexChanged" GridLines="None" RowStyle-CssClass="row" AlternatingRowStyle-CssClass="alt-row" OnRowDataBound="gvMovies_RowDataBound" 
                                 CellPadding="4" CssClass="Grid" runat="server" AutoGenerateColumns="false">
                                 <Columns>
                                     <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
@@ -68,11 +68,6 @@
                                     <asp:BoundField DataField="Description" HeaderText="Description"/>
                                     <%--Directly binding sub-objects like below yields inconsistent results.  Using RowDataBound event in the code-behind--%>
                                     <asp:BoundField DataField="Genre.Title" HeaderText="Genre"/>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <asp:Button runat="server" ID="btnUpdate" CommandArgument='<%# Eval("Id") %>' OnClick="PopulateFieldsForUpdate" Text="Update" CommandName="Update"/>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteMovie" Text="Delete" CommandName="Delete"/>

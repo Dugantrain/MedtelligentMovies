@@ -13,24 +13,6 @@ namespace MedtelligentMovies.Web.Admin {
     public partial class ManageGenres {
         
         /// <summary>
-        /// GenreUpdatePanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel GenreUpdatePanel;
-        
-        /// <summary>
-        /// gvGenres control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvGenres;
-        
-        /// <summary>
         /// InsertUpdateGenrePanel control.
         /// </summary>
         /// <remarks>
@@ -101,5 +83,32 @@ namespace MedtelligentMovies.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Cancelbutton;
+        
+        /// <summary>
+        /// GenreUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel GenreUpdatePanel;
+        
+        /// <summary>
+        /// hdnSelectedGenreId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSelectedGenreId;
+        
+        /// <summary>
+        /// gvGenres control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvGenres;
     }
 }

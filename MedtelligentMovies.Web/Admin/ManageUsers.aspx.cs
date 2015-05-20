@@ -159,6 +159,14 @@ namespace MedtelligentMovies.Web.Admin
                 {
                     deleteButton.Visible = false;
                 }
+
+                var clickPostback = Page.ClientScript.GetPostBackClientHyperlink(gvUsers, "Select$" + e.Row.RowIndex);
+                e.Row.Attributes.Add("onmouseover",
+                    "ChangeMouseOverRowColor('" + gvUsers.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedUserId.ClientID + "')");
+                e.Row.Attributes.Add("onClick",
+                    "ChangeSelectedRowColorOnClick('" + gvUsers.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedUserId.ClientID + "');" + clickPostback);
+                e.Row.Attributes.Add("onmouseout",
+                    "PreserveClickedRowStyleOnMouseOut('" + gvUsers.ClientID + "','" + hdnSelectedUserId.ClientID + "')");
             }
         }
 
@@ -171,6 +179,24 @@ namespace MedtelligentMovies.Web.Admin
             txtFirstName.Text = String.Empty;
             txtLastName.Text = String.Empty;
             InsertUserUpdatePanel.Update();
+        }
+
+        protected void OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (GridViewRow row in gvUsers.Rows)
+            {
+                if (row.RowIndex == gvUsers.SelectedIndex)
+                {
+                    var userId = gvUsers.DataKeys[row.RowIndex]["Id"];
+                    var user = UserService.GetUserById(Convert.ToInt32(userId));
+                    hdnId.Value = user.Id.ToString();
+                    txtFirstName.Text = user.FirstName;
+                    txtLastName.Text = user.LastName;
+                    txtEmail.Text = user.Email;
+                    txtPassword.Text = user.EncryptedPassword.Decrypt();
+                    txtUserName.Text = user.UserName;
+                }
+            }
         }
     }
 }

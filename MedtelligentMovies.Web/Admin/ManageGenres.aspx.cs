@@ -90,5 +90,36 @@ namespace MedtelligentMovies.Web.Admin
             txtDescription.Text = String.Empty;
             InsertUpdateGenrePanel.Update();
         }
+
+        protected void gvGenres_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                var clickPostback = Page.ClientScript.GetPostBackClientHyperlink(gvGenres, "Select$" + e.Row.RowIndex);
+                e.Row.Attributes.Add("onmouseover",
+                    "ChangeMouseOverRowColor('" + gvGenres.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedGenreId.ClientID + "')");
+                e.Row.Attributes.Add("onClick",
+                    "ChangeSelectedRowColorOnClick('" + gvGenres.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedGenreId.ClientID + "');" + clickPostback);
+                e.Row.Attributes.Add("onmouseout",
+                    "PreserveClickedRowStyleOnMouseOut('" + gvGenres.ClientID + "','" + hdnSelectedGenreId.ClientID + "')");
+            }
+        }
+
+        protected void OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (GridViewRow row in gvGenres.Rows)
+            {
+                if (row.RowIndex == gvGenres.SelectedIndex)
+                {
+
+                    var genreId = gvGenres.DataKeys[row.RowIndex]["Id"];
+                    var genre = GenreService.GetGenreById(Convert.ToInt32(genreId));
+                    hdnId.Value = genre.Id.ToString();
+                    txtTitle.Text = genre.Title;
+                    txtDescription.Text = genre.Description;
+                    InsertUpdateGenrePanel.Update();
+                }
+            }
+        }
     }
 }

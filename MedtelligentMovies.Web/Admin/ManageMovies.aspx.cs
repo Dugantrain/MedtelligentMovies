@@ -56,18 +56,6 @@ namespace MedtelligentMovies.Web.Admin
             _isGenreValid = true;
         }
 
-        protected void PopulateFieldsForUpdate(object sender, EventArgs e)
-        {
-            var lnkUpdate = (Button)sender;
-            var movieId = Convert.ToInt32(lnkUpdate.CommandArgument);
-            var movie = MovieService.GetMovieById(movieId);
-            hdnId.Value = movie.Id.ToString();
-            txtTitle.Text = movie.Title;
-            txtDescription.Text = movie.Description;
-            ddlGenre.SelectedValue = movie.GenreId.ToString();
-            InsertUpdateMoviePanel.Update();
-        }
-
         protected void DeleteMovie(object sender, EventArgs e)
         {
             var lnkRemove = (Button)sender;
@@ -135,13 +123,32 @@ namespace MedtelligentMovies.Web.Admin
 
                 e.Row.Attributes.Add("onmouseover",
                     "ChangeMouseOverRowColor('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedMovieId.ClientID + "')");
+                var clickPostback = Page.ClientScript.GetPostBackClientHyperlink(gvMovies, "Select$" + e.Row.RowIndex);
                 e.Row.Attributes.Add("onClick",
-                    "ChangeSelectedRowColorOnClick('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedMovieId.ClientID + "')");
+                    "ChangeSelectedRowColorOnClick('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "','" + hdnSelectedMovieId.ClientID + "');" + clickPostback);
+                
                 e.Row.Attributes.Add("onmouseout",
                     "PreserveClickedRowStyleOnMouseOut('" + gvMovies.ClientID + "','" + hdnSelectedMovieId.ClientID + "')");
 
                 //Man, there's got to be a better way to do this.
                 e.Row.Cells[3].Text = genre.Title;
+            }
+        }
+
+        protected void OnSelectedIndexChanged(object sender, EventArgs e)
+        {
+            foreach (GridViewRow row in gvMovies.Rows)
+            {
+                if (row.RowIndex == gvMovies.SelectedIndex)
+                {
+                    var movieId = gvMovies.DataKeys[row.RowIndex]["Id"];
+                    var movie = MovieService.GetMovieById(Convert.ToInt32(movieId));
+                    hdnId.Value = movie.Id.ToString();
+                    txtTitle.Text = movie.Title;
+                    txtDescription.Text = movie.Description;
+                    ddlGenre.SelectedValue = movie.GenreId.ToString();
+                    InsertUpdateMoviePanel.Update();
+                }
             }
         }
     }

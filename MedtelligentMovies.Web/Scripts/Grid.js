@@ -24,8 +24,8 @@ function ChangeMouseOverRowColor(gridViewId, rowId, hiddenFieldId) {
                 if (i == selectedRowId) {
                     continue;
                 } else if (i == rowId && rowId != selectedRowId) {
-                    row.style.backgroundColor = "green";
-                    $("#" + '<%= hdnSelectedMovieId.ClientID %>').val(selectedRowId);
+                    row.style.backgroundColor = "#7ac0da";
+                    $("#" + hiddenFieldId).val(selectedRowId);
                 } else {
                     row.style.backgroundColor = "";
                 }

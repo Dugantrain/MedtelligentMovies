@@ -13,24 +13,6 @@ namespace MedtelligentMovies.Web.Admin {
     public partial class ManageUsers {
         
         /// <summary>
-        /// UserUpdatePanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UserUpdatePanel;
-        
-        /// <summary>
-        /// gvUsers control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvUsers;
-        
-        /// <summary>
         /// InsertUserUpdatePanel control.
         /// </summary>
         /// <remarks>
@@ -164,5 +146,32 @@ namespace MedtelligentMovies.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Cancelbutton;
+        
+        /// <summary>
+        /// UserUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UserUpdatePanel;
+        
+        /// <summary>
+        /// hdnSelectedUserId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSelectedUserId;
+        
+        /// <summary>
+        /// gvUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvUsers;
     }
 }
