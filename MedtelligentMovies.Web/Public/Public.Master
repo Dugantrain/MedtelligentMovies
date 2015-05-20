@@ -45,7 +45,7 @@
                  border: 1px solid #e2e2e2;
                  width: 270px;
                  background:white
- }
+                 }
              .ui-menu .ui-menu-item a {
                  margin-top: 35px !important;
                  color: #999;

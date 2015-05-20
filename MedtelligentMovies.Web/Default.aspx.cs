@@ -18,7 +18,7 @@ namespace MedtelligentMovies.Web
         {
             if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                Response.Redirect("~/Admin/ManageUsers.aspx");
+                Response.Redirect("~/Admin/ManageMovies.aspx");
             }
             else
             {

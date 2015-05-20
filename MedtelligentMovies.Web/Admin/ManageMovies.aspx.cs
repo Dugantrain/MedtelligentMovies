@@ -82,7 +82,6 @@ namespace MedtelligentMovies.Web.Admin
         protected void SaveButton_Click(object sender, EventArgs e)
         {
             if (
-               String.IsNullOrEmpty(txtDescription.Text) ||
                String.IsNullOrEmpty(txtTitle.Text) ||
                 ddlGenre.SelectedIndex == 0) { return; }
 
@@ -114,6 +113,7 @@ namespace MedtelligentMovies.Web.Admin
 
             txtTitle.Text = String.Empty;
             txtDescription.Text = String.Empty;
+            ddlGenre.SelectedIndex = 0;
             InsertUpdateMoviePanel.Update();
         }
 
@@ -122,7 +122,7 @@ namespace MedtelligentMovies.Web.Admin
             hdnId.Value = String.Empty;
             txtTitle.Text = String.Empty;
             txtDescription.Text = String.Empty;
-
+            ddlGenre.SelectedIndex = 0;
             InsertUpdateMoviePanel.Update();
         }
 
@@ -132,6 +132,14 @@ namespace MedtelligentMovies.Web.Admin
             {
                 var movie = (Movie) e.Row.DataItem;
                 var genre = _genres.Single(g => g.Id == movie.GenreId);
+
+                e.Row.Attributes.Add("onmouseover",
+                    "ChangeMouseOverRowColor('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "')");
+                e.Row.Attributes.Add("onClick",
+                    "ChangeSelectedRowColorOnClick('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "')");
+                e.Row.Attributes.Add("onmouseout",
+                    "PreserveClickedRowStyleOnMouseOut('" + gvMovies.ClientID + "','" + (e.Row.RowIndex + 1) + "')");
+
                 //Man, there's got to be a better way to do this.
                 e.Row.Cells[3].Text = genre.Title;
             }

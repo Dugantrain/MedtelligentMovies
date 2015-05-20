@@ -402,6 +402,7 @@ fieldset {
 
     input, textarea {
         border: 1px solid #e2e2e2;
+        border-radius: 5px 5px 5px 5px;
         background: #fff;
         color: #333;
         font-size: 1.2em;
@@ -412,15 +413,18 @@ fieldset {
 
     textarea {
         font-family: inherit;
-        width: 500px;
+        border-radius: 5px 5px 5px 5px;
+        width: 400px;
     }
     
         input:focus, textarea:focus {
             border: 1px solid #7ac0da;
+            border-radius: 5px 5px 5px 5px;
         }
 
         input[type="checkbox"] {
             background: transparent;
+            border-radius: 5px 5px 5px 5px;
             border: inherit;
             width: auto;
         }
@@ -430,6 +434,7 @@ fieldset {
     button {
         background-color: #d3dce0;
         border: 1px solid #787878;
+        border-radius: 5px 5px 5px 5px;
         cursor: pointer;
         font-size: 1.2em;
         font-weight: 600;
@@ -508,6 +513,7 @@ table {
     border-spacing: 0;
     margin-top: 0.75em;
     border: 0 none;
+    border-radius: 5px 5px 5px 5px;
 }
 
 th {
@@ -603,6 +609,7 @@ tr.pager td {
 
         #login a {
             background: none;
+            border-radius: 5px 5px 5px 5px;
             color: #999;
             font-weight: 600;
             margin: 2px;
@@ -640,10 +647,19 @@ tr.pager td {
     .content-wrapper {
         padding-right: 10px;
         padding-left: 10px;
+        border-radius: 5px 5px 5px 5px;
     }
 
     .featured .content-wrapper {
         padding: 10px;
+        border-radius: 5px 5px 5px 5px;
+    }
+
+    .admin-editpanel {
+        height: 206px; 
+        border: solid 1px #c1c1c1;
+        border-radius: 5px 5px 5px 5px;
+        valign:top
     }
 
     /* page content */

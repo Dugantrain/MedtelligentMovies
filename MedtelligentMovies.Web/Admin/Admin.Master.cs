@@ -10,7 +10,7 @@ namespace MedtelligentMovies.Web.Admin
         {
             if (!HttpContext.Current.User.Identity.IsAuthenticated)
             {
-               Response.Redirect("/Default.aspx");
+               Response.Redirect("/Account/Login.aspx");
             }
         }
     }

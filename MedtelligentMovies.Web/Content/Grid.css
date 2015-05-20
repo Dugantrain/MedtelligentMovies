@@ -1,19 +1,30 @@
-﻿.Grid {background-color: #fff; margin: 5px 0 10px 0; border: solid 1px #525252; border-collapse:collapse; font-family:Calibri; color: #474747;}
+﻿.Grid {background-color: #fff; 
+       margin: 5px 0 10px 0;  
+       border: solid 1px #c1c1c1; 
+       border-radius: 5px 5px 5px 5px; 
+       border-collapse:collapse; 
+       font-family:Calibri; 
+       color: #474747;
+
+}
+.Grid tr {
+    CellPadding: "5";
+}
 .Grid td {
       padding: 5px;
       border: solid 1px #c1c1c1; }
 .Grid tr td:first-child
 {
-    /*** TODO:  Style the first column. ***/
     font-size: 1.25em;
     font-weight:bold
 }
 .Grid th  {
       padding : 4px 5px;
-      color: #fff;
-      background: #363670 url(/Images/grid-header.png) repeat-x top;
-      border-left: solid 1px #525252;
-      font-size: 1.20em; }
+      background-color: #d3dce0;
+      border-left: solid 1px #c1c1c1; 
+      font-size: 1.40em; 
+      font-weight: bold;
+}
 .Grid .alt {
       background: #fcfcfc url(~/Images/grid-alt.png) repeat-x top; }
 .Grid .pgr {background: #363670 url(/Images/grid-pgr.png) repeat-x top; }
@@ -25,7 +36,7 @@
 /*** Row styles ***/
 .row
 {
-    background-color: #f0fdf2;
+    background-color: #f5f5f1;
 }
 
 .alt-row
