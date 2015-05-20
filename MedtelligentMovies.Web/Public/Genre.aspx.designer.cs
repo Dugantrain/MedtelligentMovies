@@ -22,6 +22,24 @@ namespace MedtelligentMovies.Web.Public {
         protected global::System.Web.UI.WebControls.Label lblTitle;
         
         /// <summary>
+        /// MovieUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel MovieUpdatePanel;
+        
+        /// <summary>
+        /// hdnSelectedMovieId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnSelectedMovieId;
+        
+        /// <summary>
         /// gvMovies control.
         /// </summary>
         /// <remarks>

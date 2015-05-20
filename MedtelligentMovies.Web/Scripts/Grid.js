@@ -39,10 +39,9 @@ function ChangeSelectedRowColorOnClick(gridViewId, selectedRowId, hiddenFieldId)
     if (gridViewControl != null) {
         var gridViewRows = gridViewControl.rows;
         if (gridViewRows != null) {
-            var selectedRow = gridViewRows[selectedRowId];
             for (var i = 1; i < gridViewRows.length; i++) {
                 var row = gridViewRows[i];
-                if (row == selectedRow) {
+                if (selectedRowId == i) {
                     row.style.backgroundColor = "yellow";
                     $("#" + hiddenFieldId).val(selectedRowId);
                 }
