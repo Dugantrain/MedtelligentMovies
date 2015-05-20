@@ -68,6 +68,7 @@
                                     <asp:BoundField DataField="Description" HeaderText="Description"/>
                                     <%--Directly binding sub-objects like below yields inconsistent results.  Using RowDataBound event in the code-behind--%>
                                     <asp:BoundField DataField="Genre.Title" HeaderText="Genre"/>
+                                    <asp:BoundField DataField="CreatedDate" dataformatstring="{0:MM/dd/yyyy}" HeaderText="Created On" HeaderStyle-HorizontalAlign="Left" />
                                     <asp:TemplateField>
                                         <ItemTemplate>
                                             <asp:Button runat="server" ID="btnDelete" CommandArgument='<%# Eval("Id") %>' OnClick="DeleteMovie" Text="Delete" CommandName="Delete"/>

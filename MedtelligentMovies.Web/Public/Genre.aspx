@@ -22,6 +22,7 @@
                             <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
                             <asp:BoundField DataField="Title" HeaderText="Title"/>
                             <asp:BoundField DataField="Description" HeaderText="Description"/>
+                            <asp:BoundField DataField="CreatedDate" dataformatstring="{0:MM/dd/yyyy}" HeaderText="Created On" HeaderStyle-HorizontalAlign="Left" />
                         </Columns>
                     </asp:GridView>
                         </ContentTemplate>
