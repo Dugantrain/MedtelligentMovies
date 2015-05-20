@@ -10,21 +10,18 @@
     </section>
 </asp:Content>
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <asp:GridView ID="gvGenres" AutoGenerateColumns="false" OnRowDataBound="gvGenres_RowDataBound" runat="server">
-        <Columns>
-            <asp:BoundField ReadOnly="true" Visible="false" DataField="Id"/>
-            <asp:hyperlinkfield datatextfield="Title" datanavigateurlfields="Id" datanavigateurlformatstring="genre.aspx?g={0}"  />
-            <asp:BoundField DataField="Description"/>
-            <asp:TemplateField>
+    <asp:DataList ID="gvGenres" OnItemDataBound="gvGenres_ItemDataBound" RepeatColumns="2" RepeatDirection="Horizontal" RepeatLayout="Table"  AutoGenerateColumns="false" runat="server">
                 <ItemTemplate>
+                    <table>
                     <tr>
-                        <td colspan="100%">
+                        <td>
+                            <asp:HyperLink runat="server" ID="lnkGenre" Text='<%# Eval("Title") %>' NavigateUrl='<%# "genre.aspx?g=" + Eval("Id") %>' />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
 <%--                            <div id="div<%# Eval("Id") %>" style="display: none; position: relative; left: 15px; overflow: auto">--%>
-                                <asp:GridView ID="gvTopMovies" runat="server" AutoGenerateColumns="false" BorderStyle="Double"  BorderColor="#df5015" GridLines="None" Width="250px">
-                                <HeaderStyle BackColor="#df5015" Font-Bold="true" ForeColor="White" />
-                                <RowStyle BackColor="#E1E1E1" />
-                                <AlternatingRowStyle BackColor="White" />
-                                <HeaderStyle BackColor="#df5015" Font-Bold="true" ForeColor="White" />
+                                <asp:GridView ID="gvTopMovies" CssClass="Grid" runat="server" AutoGenerateColumns="false" GridLines="None" >
                                 <Columns>
                                     <asp:BoundField DataField="Id" Visible="false" HeaderText="Id" HeaderStyle-HorizontalAlign="Left" />
                                     <asp:BoundField DataField="Title" HeaderText="Title" HeaderStyle-HorizontalAlign="Left" />
@@ -34,8 +31,7 @@
 <%--                            </div>--%>
                         </td>
                     </tr>
+                        </table>
                 </ItemTemplate>
-                </asp:TemplateField>
-        </Columns>
-    </asp:GridView>
+    </asp:DataList>
 </asp:Content>

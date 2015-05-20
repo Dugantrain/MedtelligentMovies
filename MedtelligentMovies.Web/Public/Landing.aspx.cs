@@ -25,7 +25,7 @@ namespace MedtelligentMovies.Web.Public
         {
             if (!Page.IsPostBack)
             {
-                var genres = GenreService.GetGenres(0, 5);
+                var genres = GenreService.GetGenres(0, Int32.MaxValue);
                 var genreIds = genres.Select(g => g.Id).ToArray();
                 var topMoviesByGenreIds = MovieService.GetTopMoviesByGenreIds(genreIds, NumMoviesPerGenre);
                 _topMoviesByGenreIds = topMoviesByGenreIds;
@@ -34,16 +34,16 @@ namespace MedtelligentMovies.Web.Public
             }
         }
 
-        protected void gvGenres_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void gvGenres_ItemDataBound(object sender, DataListItemEventArgs e)
         {
-            if (e.Row.RowType != DataControlRowType.DataRow) return;
-            var genreId = ((Common.Models.Genre)e.Row.DataItem).Id;
+            if (e.Item.ItemType != ListItemType.Item && e.Item.ItemType != ListItemType.AlternatingItem) return;
+            var genreId = ((Common.Models.Genre)e.Item.DataItem).Id;
             //Check it out.  I got EF to return each genre and their top 5 most recent movies
             //in one query.  The Linq query below just attaches the right grouping of movies to their corresponding genre.
             var topMovies = _topMoviesByGenreIds.SingleOrDefault(m => m.Key == genreId).Value;
             if (topMovies != null)
             {
-                var gvTopMovies = (GridView)e.Row.FindControl("gvTopMovies");
+                var gvTopMovies = (GridView)e.Item.FindControl("gvTopMovies");
                 gvTopMovies.DataSource = topMovies;
                 gvTopMovies.DataBind();
             }
