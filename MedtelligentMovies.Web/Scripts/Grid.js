@@ -24,7 +24,7 @@ function ChangeMouseOverRowColor(gridViewId, rowId, hiddenFieldId) {
                 if (i == selectedRowId) {
                     continue;
                 } else if (i == rowId && rowId != selectedRowId) {
-                    row.style.backgroundColor = "#7ac0da";
+                    row.style.backgroundColor = "#f7fbfc";
                     $("#" + hiddenFieldId).val(selectedRowId);
                 } else {
                     row.style.backgroundColor = "";
